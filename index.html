@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dr. Amanda Ricciuto — Pediatric Gastroenterologist &amp; Clinician-Scientist</title>
+  <meta name="description" content="Dr. Amanda Ricciuto is a pediatric gastroenterologist and clinician-scientist at SickKids and the University of Toronto, specializing in IBD and primary sclerosing cholangitis.">
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --accent: #1a5276;
+      --accent-light: #2980b9;
+      --text: #2c3e50;
+      --text-light: #5d6d7e;
+      --bg: #ffffff;
+      --bg-alt: #f8f9fa;
+      --border: #e5e8eb;
+      --max-w: 800px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 70px;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    /* ── Navigation ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.25rem 1.5rem;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0.75rem 1.5rem;
+    }
+
+    nav a {
+      color: var(--text-light);
+      text-decoration: none;
+      font-size: 0.9rem;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+
+    nav a:hover { color: var(--accent); }
+
+    /* ── Main Content ── */
+    main {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 1.5rem 4rem;
+    }
+
+    section {
+      padding: 3rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    section:last-child { border-bottom: none; }
+
+    h1, h2, h3 {
+      font-family: Georgia, "Times New Roman", Times, serif;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      margin-bottom: 1.5rem;
+    }
+
+    h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p { margin-bottom: 1rem; }
+
+    a {
+      color: var(--accent-light);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    a:hover {
+      color: var(--accent);
+      text-decoration: underline;
+    }
+
+    /* ── Hero Section ── */
+    .hero {
+      text-align: center;
+      padding: 4rem 0 3rem;
+    }
+
+    .hero-photo {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--border);
+      margin-bottom: 1.5rem;
+      background: var(--bg-alt);
+    }
+
+    .hero-photo-placeholder {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      border: 3px solid var(--border);
+      margin: 0 auto 1.5rem;
+      background: var(--bg-alt);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-light);
+      font-size: 3rem;
+      font-family: Georgia, serif;
+    }
+
+    .hero h1 {
+      font-size: 2.2rem;
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+
+    .hero .subtitle {
+      font-size: 1.15rem;
+      color: var(--text-light);
+      margin-bottom: 0.5rem;
+      font-weight: 400;
+    }
+
+    .hero .affiliations {
+      font-size: 0.95rem;
+      color: var(--text-light);
+    }
+
+    /* ── About Section ── */
+    .credentials {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+      margin-top: 1.5rem;
+    }
+
+    .credential-item {
+      padding: 1rem 1.25rem;
+      background: var(--bg-alt);
+      border-radius: 6px;
+      border-left: 3px solid var(--accent);
+    }
+
+    .credential-item h3 {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+      margin-bottom: 0.35rem;
+    }
+
+    .credential-item p {
+      margin-bottom: 0;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    /* ── Research Section ── */
+    .research-themes {
+      list-style: none;
+      margin: 1rem 0 1.5rem;
+    }
+
+    .research-themes li {
+      padding: 0.5rem 0 0.5rem 1.5rem;
+      position: relative;
+      font-size: 0.95rem;
+    }
+
+    .research-themes li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.9rem;
+      width: 8px;
+      height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+
+    .consortia {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      padding: 1rem 1.25rem;
+      background: var(--bg-alt);
+      border-radius: 6px;
+    }
+
+    .consortia strong { color: var(--text); }
+
+    /* ── Publications Section ── */
+    .pub-list {
+      list-style: none;
+    }
+
+    .pub-list li {
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.93rem;
+      line-height: 1.65;
+    }
+
+    .pub-list li:last-child { border-bottom: none; }
+
+    .pub-title {
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .pub-journal {
+      color: var(--text-light);
+      font-style: italic;
+    }
+
+    .pub-links a {
+      font-size: 0.85rem;
+      margin-right: 0.75rem;
+      font-weight: 500;
+    }
+
+    .scholar-link {
+      display: inline-block;
+      margin-top: 1.5rem;
+      padding: 0.6rem 1.25rem;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 5px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+
+    .scholar-link:hover {
+      background: var(--accent-light);
+      color: #fff;
+      text-decoration: none;
+    }
+
+    /* ── Awards Section ── */
+    .awards-list {
+      list-style: none;
+    }
+
+    .awards-list li {
+      padding: 0.6rem 0;
+      font-size: 0.95rem;
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .award-year {
+      font-weight: 600;
+      color: var(--accent);
+      min-width: 3rem;
+      flex-shrink: 0;
+    }
+
+    .award-name { color: var(--text); }
+    .award-org { color: var(--text-light); }
+
+    /* ── Contact Section ── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin-top: 1rem;
+    }
+
+    .contact-item {
+      padding: 1rem 1.25rem;
+      background: var(--bg-alt);
+      border-radius: 6px;
+      font-size: 0.93rem;
+    }
+
+    .contact-item h3 {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+      margin-bottom: 0.35rem;
+    }
+
+    .contact-item a { word-break: break-all; }
+
+    .location {
+      margin-top: 1.5rem;
+      font-size: 0.9rem;
+      color: var(--text-light);
+      text-align: center;
+    }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding: 2rem 1.5rem;
+      font-size: 0.8rem;
+      color: var(--text-light);
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .hero { padding: 2.5rem 0 2rem; }
+      .hero h1 { font-size: 1.7rem; }
+      .hero .subtitle { font-size: 1rem; }
+      h2 { font-size: 1.35rem; }
+      section { padding: 2rem 0; }
+
+      nav ul {
+        gap: 0.15rem 1rem;
+        padding: 0.6rem 1rem;
+      }
+      nav a { font-size: 0.8rem; }
+
+      .contact-grid { grid-template-columns: 1fr; }
+
+      .awards-list li {
+        flex-direction: column;
+        gap: 0.15rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#publications">Publications</a></li>
+    <li><a href="#awards">Awards</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <!-- Hero -->
+  <section class="hero" id="top">
+    <img src="headshot.jpg" alt="Dr. Amanda Ricciuto" class="hero-photo">
+    <h1>Dr. Amanda Ricciuto, MD, PhD</h1>
+    <p class="subtitle">Pediatric Gastroenterologist &middot; Clinician-Scientist</p>
+    <p class="affiliations">The Hospital for Sick Children (SickKids) &middot; University of Toronto</p>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <h2>About</h2>
+    <p>
+      I am a pediatric gastroenterologist and clinician-scientist at The Hospital for Sick Children
+      (SickKids) in Toronto. My clinical practice and research focus on inflammatory bowel disease
+      (IBD) and primary sclerosing cholangitis (PSC) in children and adolescents. I am particularly
+      interested in understanding the unique phenotype of PSC-IBD, optimizing therapeutic strategies
+      through drug monitoring and treat-to-target approaches, and developing novel therapies for
+      children living with these conditions.
+    </p>
+
+    <div class="credentials">
+      <div class="credential-item">
+        <h3>Education</h3>
+        <p>MDCM, McGill University &middot; PhD in Clinical Epidemiology, Institute of Health Policy, Management and Evaluation (IHPME), University of Toronto</p>
+      </div>
+      <div class="credential-item">
+        <h3>Training</h3>
+        <p>Paediatrics Residency, McGill University &middot; Paediatric Gastroenterology Fellowship, The Hospital for Sick Children</p>
+      </div>
+      <div class="credential-item">
+        <h3>Current Appointments</h3>
+        <p>
+          Staff Physician, Division of Gastroenterology, Hepatology and Nutrition, SickKids
+          &middot; Assistant Professor, Department of Paediatrics, Temerty Faculty of Medicine, University of Toronto
+          &middot; Associate Scientist, Child Health Evaluative Sciences (CHES), SickKids Research Institute
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Research -->
+  <section id="research">
+    <h2>Research</h2>
+    <p>
+      My research program bridges clinical epidemiology, therapeutic optimization, and translational
+      science in pediatric IBD and PSC. Key areas of investigation include:
+    </p>
+
+    <ul class="research-themes">
+      <li>PSC-IBD phenotyping, natural history, and novel therapies including oral vancomycin</li>
+      <li>Gut microbiome alterations in primary sclerosing cholangitis</li>
+      <li>Pharmacogenetics in pediatric IBD (TPMT/NUDT15) and precision dosing</li>
+      <li>Therapeutic drug monitoring and treat-to-target strategies in IBD</li>
+      <li>Colorectal neoplasia surveillance in PSC-IBD</li>
+      <li>Epidemiology and long-term outcomes of pediatric-onset IBD</li>
+    </ul>
+
+    <div class="consortia">
+      <strong>Consortia &amp; Networks:</strong>
+      Paediatric PSC Consortium &middot;
+      Canadian Children IBD Network (CIDsCaNN) &middot;
+      International Organization for the Study of IBD (IOIBD) &middot;
+      Canadian Network for the Study of GI Inflammation in Childhood and the Environment (CANGIEC)
+    </div>
+  </section>
+
+  <!-- Publications -->
+  <section id="publications">
+    <h2>Selected Publications</h2>
+    <ol class="pub-list">
+
+      <li>
+        <span class="pub-title">Primary sclerosing cholangitis in children with inflammatory bowel disease: An ESPGHAN position paper.</span><br>
+        ESPGHAN Hepatology Committee and IBD Porto Group.<br>
+        <span class="pub-journal">Journal of Pediatric Gastroenterology and Nutrition, 2025.</span><br>
+        <span class="pub-links">
+          <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11788976/" target="_blank" rel="noopener">PMC</a>
+        </span>
+      </li>
+
+      <li>
+        <span class="pub-title">Oral vancomycin is associated with improved inflammatory bowel disease clinical outcomes in primary sclerosing cholangitis-associated inflammatory bowel disease (PSC-IBD): A matched analysis from the Paediatric PSC Consortium.</span><br>
+        Ricciuto A, Liu K, El-Matary W, <em>et al.</em><br>
+        <span class="pub-journal">Alimentary Pharmacology &amp; Therapeutics, 2024; 59(10):1236&ndash;1247.</span><br>
+        <span class="pub-links">
+          <a href="https://pubmed.ncbi.nlm.nih.gov/38462727/" target="_blank" rel="noopener">PubMed</a>
+          <a href="https://onlinelibrary.wiley.com/doi/abs/10.1111/apt.17936" target="_blank" rel="noopener">DOI</a>
+        </span>
+      </li>
+
+      <li>
+        <span class="pub-title">Landscape of TPMT and NUDT15 pharmacogenetic variation in a cohort of Canadian pediatric inflammatory bowel disease patients.</span><br>
+        <span class="pub-journal">Inflammatory Bowel Diseases, 2024; 30(12):2418&ndash;2427.</span><br>
+        <span class="pub-links">
+          <a href="https://pubmed.ncbi.nlm.nih.gov/38788739/" target="_blank" rel="noopener">PubMed</a>
+          <a href="https://doi.org/10.1093/ibd/izae109" target="_blank" rel="noopener">DOI</a>
+        </span>
+      </li>
+
+      <li>
+        <span class="pub-title">Primary sclerosing cholangitis&ndash;inflammatory bowel disease: Epidemiology, mortality, and impact of diagnostic sequence.</span><br>
+        Leung KK, Li W, Hansen B, <em>et al.</em><br>
+        <span class="pub-journal">JHEP Reports, 2024.</span><br>
+        <span class="pub-links">
+          <a href="https://pubmed.ncbi.nlm.nih.gov/40041117/" target="_blank" rel="noopener">PubMed</a>
+          <a href="https://www.jhep-reports.eu/article/S2589-5559(24)00276-3/fulltext" target="_blank" rel="noopener">Full Text</a>
+        </span>
+      </li>
+
+      <li>
+        <span class="pub-title">STRIDE-II: An update on the Selecting Therapeutic Targets in Inflammatory Bowel Disease (STRIDE) Initiative of the International Organization for the Study of IBD (IOIBD).</span><br>
+        Turner D, Ricciuto A, Lewis A, <em>et al.</em><br>
+        <span class="pub-journal">Gastroenterology, 2021; 160(5):1570&ndash;1583.</span><br>
+        <span class="pub-links">
+          <a href="https://pubmed.ncbi.nlm.nih.gov/33359090/" target="_blank" rel="noopener">PubMed</a>
+        </span>
+      </li>
+
+      <li>
+        <span class="pub-title">Diagnostic delay is associated with complicated disease and growth impairment in paediatric Crohn's disease.</span><br>
+        Ricciuto A, Mack DR, Huynh HQ, <em>et al.</em><br>
+        <span class="pub-journal">Journal of Crohn's and Colitis, 2021; 15(3):419&ndash;431.</span><br>
+        <span class="pub-links">
+          <a href="https://pubmed.ncbi.nlm.nih.gov/32978629/" target="_blank" rel="noopener">PubMed</a>
+        </span>
+      </li>
+
+      <li>
+        <span class="pub-title">Colorectal dysplasia and cancer in pediatric-onset ulcerative colitis associated with primary sclerosing cholangitis.</span><br>
+        El-Matary W, Guthery SL, Amir AZ, <em>et al.</em><br>
+        <span class="pub-journal">Clinical Gastroenterology and Hepatology, 2021; 19(5):1067&ndash;1070.</span><br>
+        <span class="pub-links">
+          <a href="https://pubmed.ncbi.nlm.nih.gov/32360820/" target="_blank" rel="noopener">PubMed</a>
+        </span>
+      </li>
+
+      <li>
+        <span class="pub-title">Gut microbiome in primary sclerosing cholangitis: A review.</span><br>
+        Little R, Wine E, Kamath BM, Griffiths AM, Ricciuto A.<br>
+        <span class="pub-journal">World Journal of Gastroenterology, 2020; 26(21):2768&ndash;2780.</span><br>
+        <span class="pub-links">
+          <a href="https://www.wjgnet.com/1007-9327/full/v26/i21/2768.htm" target="_blank" rel="noopener">Full Text</a>
+        </span>
+      </li>
+
+      <li>
+        <span class="pub-title">Clinical outcomes with therapeutic drug monitoring in inflammatory bowel disease: A systematic review with meta-analysis.</span><br>
+        <span class="pub-journal">Journal of Crohn's and Colitis, 2018.</span><br>
+        <span class="pub-links">
+          <a href="https://pubmed.ncbi.nlm.nih.gov/30107416/" target="_blank" rel="noopener">PubMed</a>
+        </span>
+      </li>
+
+      <li>
+        <span class="pub-title">The IBD and PSC phenotypes of PSC-IBD.</span><br>
+        Ricciuto A, Kamath BM, Griffiths AM.<br>
+        <span class="pub-journal">Current Gastroenterology Reports, 2018; 20:16.</span><br>
+        <span class="pub-links">
+          <a href="https://link.springer.com/article/10.1007/s11894-018-0620-2" target="_blank" rel="noopener">Springer</a>
+        </span>
+      </li>
+
+    </ol>
+
+    <a href="https://scholar.google.com/citations?user=8Kd-BI8AAAAJ&hl=en" target="_blank" rel="noopener" class="scholar-link">
+      View Full Publication List on Google Scholar &rarr;
+    </a>
+  </section>
+
+  <!-- Awards -->
+  <section id="awards">
+    <h2>Awards &amp; Honours</h2>
+    <ul class="awards-list">
+      <li>
+        <span class="award-year">2019</span>
+        <span><span class="award-name">Gerard Odell Award for Excellence in Liver Disease Research</span> &mdash; <span class="award-org">NASPGHAN</span></span>
+      </li>
+      <li>
+        <span class="award-year">2019</span>
+        <span><span class="award-name">Young Faculty Clinical Investigator Award</span> &mdash; <span class="award-org">NASPGHAN</span></span>
+      </li>
+      <li>
+        <span class="award-year">2019</span>
+        <span><span class="award-name">Andrew Sass-Kortsak Award</span> &mdash; <span class="award-org">SickKids Research Institute</span></span>
+      </li>
+      <li>
+        <span class="award-year">2019</span>
+        <span><span class="award-name">Claire Bombardier PhD Platinum Award</span> &mdash; <span class="award-org">IHPME, University of Toronto</span></span>
+      </li>
+      <li>
+        <span class="award-year">2019</span>
+        <span><span class="award-name">Beverly Antle Award</span> &mdash; <span class="award-org">CHES, SickKids Research Institute</span></span>
+      </li>
+      <li>
+        <span class="award-year">2017</span>
+        <span><span class="award-name">Fellow Research Award</span> &mdash; <span class="award-org">NASPGHAN</span></span>
+      </li>
+    </ul>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <h2>Contact</h2>
+    <div class="contact-grid">
+      <div class="contact-item">
+        <h3>Email</h3>
+        <a href="mailto:sandra.layno@sickkids.ca">sandra.layno@sickkids.ca</a><br>
+        <span style="font-size:0.85rem;color:var(--text-light);">(Administrative contact: Sandra Layno)</span>
+      </div>
+      <div class="contact-item">
+        <h3>ORCID</h3>
+        <a href="https://orcid.org/0000-0001-9538-3005" target="_blank" rel="noopener">0000-0001-9538-3005</a>
+      </div>
+      <div class="contact-item">
+        <h3>Google Scholar</h3>
+        <a href="https://scholar.google.com/citations?user=8Kd-BI8AAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar Profile</a>
+      </div>
+      <div class="contact-item">
+        <h3>ResearchGate</h3>
+        <a href="https://www.researchgate.net/profile/Amanda-Ricciuto" target="_blank" rel="noopener">Amanda Ricciuto</a>
+      </div>
+      <div class="contact-item">
+        <h3>X / Twitter</h3>
+        <a href="https://x.com/amandaricciuto" target="_blank" rel="noopener">@amandaricciuto</a>
+      </div>
+      <div class="contact-item">
+        <h3>Institutional Profile</h3>
+        <a href="https://www.sickkids.ca/en/staff/r/amanda-ricciuto/" target="_blank" rel="noopener">SickKids Staff Directory</a>
+      </div>
+    </div>
+
+    <p class="location">
+      The Hospital for Sick Children &middot; 555 University Avenue &middot; Toronto, ON, Canada
+    </p>
+  </section>
+
+</main>
+
+<footer>
+  &copy; 2025 Amanda Ricciuto. All rights reserved.
+</footer>
+
+</body>
+</html>
