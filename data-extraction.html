@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Data Extraction Form — PSC vs PSC-AIH Overlap Systematic Review</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #1a1a1a;
+    background: #f5f7fa;
+    margin: 0;
+    padding: 20px;
+  }
+
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+    color: #1a5276;
+    margin: 0 0 4px;
+  }
+  h1 small {
+    font-size: 0.85rem;
+    color: #666;
+    font-weight: normal;
+  }
+
+  /* Top toolbar */
+  .toolbar {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin: 12px 0 20px;
+  }
+  .toolbar button {
+    padding: 7px 16px;
+    font-size: 13px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    cursor: pointer;
+    color: #333;
+  }
+  .toolbar button:hover { background: #e8f0fe; border-color: #1a5276; }
+  .toolbar button.primary {
+    background: #1a5276;
+    color: #fff;
+    border-color: #1a5276;
+  }
+  .toolbar button.primary:hover { background: #154360; }
+  .toolbar button.danger { color: #c0392b; border-color: #e6b0aa; }
+  .toolbar button.danger:hover { background: #fdf2f2; }
+
+  .toolbar .spacer { flex: 1; }
+  .save-status {
+    font-size: 12px;
+    color: #888;
+    align-self: center;
+  }
+
+  /* Study selector */
+  .study-selector {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+    padding: 10px 14px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+  }
+  .study-selector label { font-weight: 600; white-space: nowrap; }
+  .study-selector select { flex: 1; max-width: 400px; }
+
+  /* Sections */
+  .section {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    margin-bottom: 14px;
+    overflow: hidden;
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    padding: 10px 14px;
+    background: #f0f4f8;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+    user-select: none;
+  }
+  .section-header:hover { background: #e4ecf4; }
+  .section-header h2 {
+    margin: 0;
+    font-size: 0.95rem;
+    color: #1a5276;
+    flex: 1;
+  }
+  .section-header .toggle {
+    font-size: 18px;
+    color: #888;
+    transition: transform 0.2s;
+  }
+  .section.collapsed .section-header .toggle { transform: rotate(-90deg); }
+  .section.collapsed .section-body { display: none; }
+  .section-body { padding: 14px; }
+
+  /* Form elements */
+  .field-row {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+  }
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .field.full { flex: 1; min-width: 200px; }
+  .field.half { flex: 1; min-width: 150px; }
+  .field.third { flex: 0 0 calc(33.3% - 8px); min-width: 120px; }
+  .field.quarter { flex: 0 0 calc(25% - 9px); min-width: 100px; }
+  .field.small { flex: 0 0 120px; }
+  .field.tiny { flex: 0 0 80px; }
+
+  .field label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #555;
+  }
+  .field input, .field select, .field textarea {
+    padding: 6px 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 13px;
+    font-family: inherit;
+    background: #fff;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus {
+    outline: none;
+    border-color: #1a5276;
+    box-shadow: 0 0 0 2px rgba(26,82,118,0.15);
+  }
+  .field textarea { resize: vertical; min-height: 60px; }
+
+  /* Two-column PSC / Overlap layout */
+  .psc-overlap-grid {
+    display: grid;
+    grid-template-columns: 180px 1fr 1fr 1fr;
+    gap: 6px 12px;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  .psc-overlap-grid .col-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #555;
+    text-align: center;
+  }
+  .psc-overlap-grid .row-label {
+    font-size: 13px;
+    color: #333;
+  }
+  .psc-overlap-grid input, .psc-overlap-grid select {
+    padding: 5px 7px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 13px;
+    width: 100%;
+  }
+  .psc-overlap-grid input:focus, .psc-overlap-grid select:focus {
+    outline: none;
+    border-color: #1a5276;
+    box-shadow: 0 0 0 2px rgba(26,82,118,0.15);
+  }
+
+  /* Sub-section label */
+  .sub-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #1a5276;
+    margin: 12px 0 6px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #e8e8e8;
+  }
+  .sub-label:first-child { margin-top: 0; }
+
+  /* Checkbox group */
+  .checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 16px;
+    margin: 6px 0;
+  }
+  .checkbox-group label {
+    font-size: 13px;
+    font-weight: normal;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+  }
+
+  /* Dynamic effect estimate block */
+  .effect-block {
+    background: #f9fafb;
+    border: 1px solid #e8e8e8;
+    border-radius: 4px;
+    padding: 10px 12px;
+    margin: 6px 0;
+  }
+  .effect-block .effect-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: #444;
+    margin-bottom: 6px;
+  }
+  .effect-fields {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: flex-end;
+  }
+  .effect-fields .field { flex: 0 0 auto; }
+  .effect-fields input { width: 100px; }
+
+  .hidden { display: none !important; }
+
+  /* Outcome tab nav */
+  .outcome-tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 2px solid #ddd;
+    margin-bottom: 14px;
+  }
+  .outcome-tab {
+    padding: 8px 16px;
+    font-size: 13px;
+    cursor: pointer;
+    border: none;
+    background: none;
+    color: #666;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    font-family: inherit;
+  }
+  .outcome-tab:hover { color: #1a5276; }
+  .outcome-tab.active {
+    color: #1a5276;
+    font-weight: 600;
+    border-bottom-color: #1a5276;
+  }
+  .outcome-panel { display: none; }
+  .outcome-panel.active { display: block; }
+
+  /* Age/follow-up measure type */
+  .measure-block { margin-bottom: 8px; }
+  .measure-fields {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    margin-top: 4px;
+  }
+  .measure-fields .field input { width: 110px; }
+
+  /* Responsive */
+  @media (max-width: 700px) {
+    .psc-overlap-grid { grid-template-columns: 1fr; }
+    .field.third, .field.quarter { flex: 1 1 100%; }
+  }
+
+  /* Print */
+  @media print {
+    body { background: #fff; padding: 10px; font-size: 12px; }
+    .toolbar, .study-selector { display: none; }
+    .section { break-inside: avoid; border: 1px solid #999; }
+    .section.collapsed .section-body { display: block !important; }
+    .section-header { background: #eee; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Data Extraction Form <small>— PSC vs PSC-AIH Overlap Systematic Review</small></h1>
+
+  <div class="toolbar">
+    <button class="primary" onclick="saveStudy()">Save</button>
+    <button onclick="newStudy()">+ New Study</button>
+    <button onclick="duplicateStudy()">Duplicate</button>
+    <button class="danger" onclick="deleteStudy()">Delete Study</button>
+    <span class="spacer"></span>
+    <button onclick="exportCSV()">Export All (CSV)</button>
+    <button onclick="exportJSON()">Export All (JSON)</button>
+    <button onclick="importJSON('merge')">Merge (add studies)</button>
+    <input type="file" id="importFile" accept=".json" class="hidden" onchange="handleImport(event)">
+    <span class="save-status" id="saveStatus"></span>
+  </div>
+
+  <div class="study-selector">
+    <label for="studySelect">Study:</label>
+    <select id="studySelect" onchange="loadStudy(this.value)"></select>
+  </div>
+
+  <!-- Section 1: Study Characteristics -->
+  <div class="section" id="sec-study">
+    <div class="section-header" onclick="toggleSection(this)">
+      <h2>A. Study Characteristics</h2>
+      <span class="toggle">&#9662;</span>
+    </div>
+    <div class="section-body">
+      <div class="field-row">
+        <div class="field full">
+          <label>Study title</label>
+          <input type="text" data-key="study_title">
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field half">
+          <label>First author's last name</label>
+          <input type="text" data-key="first_author">
+        </div>
+        <div class="field small">
+          <label>Publication year</label>
+          <input type="number" data-key="pub_year" min="1900" max="2099">
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field half">
+          <label>Country of origin</label>
+          <input type="text" data-key="country">
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field half">
+          <label>Study design</label>
+          <select data-key="study_design" onchange="toggleOtherDesign(this)">
+            <option value="">— Select —</option>
+            <option value="Retrospective cohort">Retrospective cohort</option>
+            <option value="Prospective cohort">Prospective cohort</option>
+            <option value="Case-control">Case-control</option>
+            <option value="Cross-sectional">Cross-sectional</option>
+            <option value="RCT">RCT</option>
+            <option value="Case series">Case series</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="field half hidden" id="otherDesignField">
+          <label>Specify other design</label>
+          <input type="text" data-key="study_design_other">
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field half">
+          <label>Study period / data source years</label>
+          <input type="text" data-key="study_period">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2: Population -->
+  <div class="section" id="sec-population">
+    <div class="section-header" onclick="toggleSection(this)">
+      <h2>B. Population</h2>
+      <span class="toggle">&#9662;</span>
+    </div>
+    <div class="section-body">
+
+      <div class="psc-overlap-grid">
+        <div></div>
+        <div class="col-label">PSC</div>
+        <div class="col-label">Overlap</div>
+        <div class="col-label">Total</div>
+
+        <div class="row-label">Sample size (N)</div>
+        <input type="text" data-key="n_psc">
+        <input type="text" data-key="n_overlap">
+        <input type="text" data-key="n_total">
+
+        <div class="row-label">Sex — N (%) male</div>
+        <input type="text" data-key="sex_psc" placeholder="e.g. 34/52 (65%)">
+        <input type="text" data-key="sex_overlap" placeholder="e.g. 34/52 (65%)">
+        <input type="text" data-key="sex_total" placeholder="e.g. 34/52 (65%)">
+
+        <div class="row-label">IBD — N (%)</div>
+        <input type="text" data-key="ibd_psc" placeholder="e.g. 42/52 (81%)">
+        <input type="text" data-key="ibd_overlap" placeholder="e.g. 42/52 (81%)">
+        <input type="text" data-key="ibd_total" placeholder="e.g. 42/52 (81%)">
+      </div>
+
+      <!-- Age -->
+      <div class="sub-label">Age at diagnosis</div>
+      <div class="field-row">
+        <div class="field half">
+          <label>Reporting format</label>
+          <select data-key="age_format" onchange="toggleMeasureFields('age', this.value)">
+            <option value="">— Select —</option>
+            <option value="mean_sd">Mean (SD)</option>
+            <option value="mean_range">Mean (range)</option>
+            <option value="median_iqr">Median (IQR)</option>
+            <option value="median_range">Median (range)</option>
+            <option value="mean_median">Mean (SD) and Median (IQR/range)</option>
+            <option value="other">Other</option>
+            <option value="nr">Not reported</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="age-fields-psc-overlap" class="hidden">
+        <div class="psc-overlap-grid" id="age-mean-row" class="hidden">
+          <div class="row-label">Mean (SD)</div>
+          <input type="text" data-key="age_mean_psc" placeholder="e.g. 13.8 (4.2)">
+          <input type="text" data-key="age_mean_overlap" placeholder="e.g. 13.8 (4.2)">
+          <input type="text" data-key="age_mean_total" placeholder="e.g. 13.8 (4.2)">
+        </div>
+        <div class="psc-overlap-grid" id="age-median-row">
+          <div class="row-label">Median (IQR or range)</div>
+          <input type="text" data-key="age_median_psc" placeholder="e.g. 14.7 (1.5–19.6)">
+          <input type="text" data-key="age_median_overlap" placeholder="e.g. 14.7 (1.5–19.6)">
+          <input type="text" data-key="age_median_total" placeholder="e.g. 14.7 (1.5–19.6)">
+        </div>
+        <div class="psc-overlap-grid" id="age-other-row" class="hidden">
+          <div class="row-label">Other (specify)</div>
+          <input type="text" data-key="age_other_psc">
+          <input type="text" data-key="age_other_overlap">
+          <input type="text" data-key="age_other_total">
+        </div>
+      </div>
+
+      <!-- PSC-AIH definition -->
+      <div class="sub-label">PSC-AIH Overlap</div>
+      <div class="field-row">
+        <div class="field full">
+          <label>PSC-AIH overlap diagnosis / definition used in study</label>
+          <textarea data-key="psc_aih_definition" rows="2"></textarea>
+        </div>
+      </div>
+
+      <!-- Treatment -->
+      <div class="sub-label">Treatment</div>
+      <div class="psc-overlap-grid">
+        <div></div>
+        <div class="col-label">PSC</div>
+        <div class="col-label">Overlap</div>
+        <div class="col-label">Total</div>
+        <div class="row-label">Ursodiol — N (%)</div>
+        <input type="text" data-key="tx_urso_psc" placeholder="e.g. 12/38 (31.6%)">
+        <input type="text" data-key="tx_urso_overlap" placeholder="e.g. 6/14 (42.9%)">
+        <input type="text" data-key="tx_urso_total" placeholder="e.g. 18/52 (34.6%)">
+        <div class="row-label">Steroids — N (%)</div>
+        <input type="text" data-key="tx_steroids_psc" placeholder="e.g. 5/38 (13.2%)">
+        <input type="text" data-key="tx_steroids_overlap" placeholder="e.g. 8/14 (57.1%)">
+        <input type="text" data-key="tx_steroids_total" placeholder="e.g. 13/52 (25%)">
+        <div class="row-label">Immunomodulator — N (%)</div>
+        <input type="text" data-key="tx_immod_psc" placeholder="e.g. 9/38 (23.7%)">
+        <input type="text" data-key="tx_immod_overlap" placeholder="e.g. 6/14 (42.9%)">
+        <input type="text" data-key="tx_immod_total" placeholder="e.g. 15/52 (28.8%)">
+      </div>
+      <div class="sub-label" style="font-size:11px; color:#666;">Other treatments</div>
+      <div id="tx-other-rows"></div>
+      <button type="button" onclick="addOtherTxRow()" style="margin:6px 0; padding:4px 12px; font-size:12px; border:1px solid #ccc; border-radius:4px; background:#fff; cursor:pointer;">+ Add other treatment</button>
+
+      <div class="field-row" style="margin-top:6px;">
+        <div class="field full">
+          <label>Treatment notes</label>
+          <input type="text" data-key="tx_notes" placeholder="e.g. combination regimens, duration details">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 3: Follow-up -->
+  <div class="section" id="sec-followup">
+    <div class="section-header" onclick="toggleSection(this)">
+      <h2>C. Follow-up</h2>
+      <span class="toggle">&#9662;</span>
+    </div>
+    <div class="section-body">
+      <div class="field-row">
+        <div class="field half">
+          <label>Follow-up duration — reporting format</label>
+          <select data-key="fu_format" onchange="toggleMeasureFields('fu', this.value)">
+            <option value="">— Select —</option>
+            <option value="mean_sd">Mean (SD)</option>
+            <option value="mean_range">Mean (range)</option>
+            <option value="median_iqr">Median (IQR)</option>
+            <option value="median_range">Median (range)</option>
+            <option value="mean_median">Mean (SD) and Median (IQR/range)</option>
+            <option value="other">Other</option>
+            <option value="nr">Not reported</option>
+          </select>
+        </div>
+      </div>
+      <div id="fu-fields-psc-overlap" class="hidden">
+        <div class="psc-overlap-grid" id="fu-mean-row">
+          <div class="row-label">Mean (SD)</div>
+          <input type="text" data-key="fu_mean_psc" placeholder="e.g. 6.6 (4.4) years">
+          <input type="text" data-key="fu_mean_overlap" placeholder="e.g. 6.6 (4.4) years">
+          <input type="text" data-key="fu_mean_total" placeholder="e.g. 6.6 (4.4) years">
+        </div>
+        <div class="psc-overlap-grid" id="fu-median-row">
+          <div class="row-label">Median (IQR or range)</div>
+          <input type="text" data-key="fu_median_psc" placeholder="e.g. 5.2 (2.1–8.3) years">
+          <input type="text" data-key="fu_median_overlap" placeholder="e.g. 5.2 (2.1–8.3) years">
+          <input type="text" data-key="fu_median_total" placeholder="e.g. 5.2 (2.1–8.3) years">
+        </div>
+        <div class="psc-overlap-grid" id="fu-other-row" class="hidden">
+          <div class="row-label">Other (specify)</div>
+          <input type="text" data-key="fu_other_psc">
+          <input type="text" data-key="fu_other_overlap">
+          <input type="text" data-key="fu_other_total">
+        </div>
+      </div>
+      <div class="psc-overlap-grid" style="margin-top:10px;">
+        <div></div>
+        <div class="col-label">PSC</div>
+        <div class="col-label">Overlap</div>
+        <div class="col-label">Total</div>
+        <div class="row-label">Loss to follow-up N (%)</div>
+        <input type="text" data-key="loss_fu_psc" placeholder="e.g. 3/52 (5.8%)">
+        <input type="text" data-key="loss_fu_overlap" placeholder="e.g. 1/14 (7.1%)">
+        <input type="text" data-key="loss_fu_total" placeholder="e.g. 4/52 (7.7%)">
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4: Outcomes -->
+  <div class="section" id="sec-outcomes">
+    <div class="section-header" onclick="toggleSection(this)">
+      <h2>D. Outcomes</h2>
+      <span class="toggle">&#9662;</span>
+    </div>
+    <div class="section-body">
+      <div class="outcome-tabs" id="outcomeTabs">
+        <button class="outcome-tab active" onclick="switchOutcome(0, this)">Liver Transplant</button>
+        <button class="outcome-tab" onclick="switchOutcome(1, this)">Death</button>
+        <button class="outcome-tab" onclick="switchOutcome(2, this)">Any Cancer</button>
+        <button class="outcome-tab" onclick="switchOutcome(3, this)">HPB Cancer</button>
+        <button class="outcome-tab" onclick="switchOutcome(4, this)">CRC</button>
+      </div>
+      <div id="outcomePanels"></div>
+    </div>
+  </div>
+
+  <!-- Section 5: Notes -->
+  <div class="section" id="sec-notes">
+    <div class="section-header" onclick="toggleSection(this)">
+      <h2>E. Notes</h2>
+      <span class="toggle">&#9662;</span>
+    </div>
+    <div class="section-body">
+      <div class="field-row">
+        <div class="field full">
+          <label>Additional notes / comments</label>
+          <textarea data-key="notes" rows="4"></textarea>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field half">
+          <label>Extractor initials</label>
+          <input type="text" data-key="extractor">
+        </div>
+        <div class="field half">
+          <label>Date extracted</label>
+          <input type="date" data-key="extraction_date">
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const OUTCOMES = [
+  { id: 'lt', label: 'Liver Transplant', survLabel: 'Transplant-free survival' },
+  { id: 'death', label: 'Death', survLabel: 'Overall survival' },
+  { id: 'any_ca', label: 'Any Cancer', survLabel: 'Cancer-free survival' },
+  { id: 'hpb_ca', label: 'HPB Cancer', survLabel: 'HPB cancer-free survival' },
+  { id: 'crc', label: 'Colorectal Cancer', survLabel: 'CRC-free survival' }
+];
+
+const EFFECT_TYPES = [
+  { id: 'unadj_or', label: 'Unadjusted OR' },
+  { id: 'unadj_rr', label: 'Unadjusted RR' },
+  { id: 'unadj_hr', label: 'Unadjusted HR' },
+  { id: 'adj_or', label: 'Adjusted OR' },
+  { id: 'adj_rr', label: 'Adjusted RR' },
+  { id: 'adj_hr', label: 'Adjusted HR' }
+];
+
+const STORAGE_KEY = 'sr_data_extraction';
+let studies = [];
+let currentStudyIdx = 0;
+
+// ---- Initialize ----
+function init() {
+  buildOutcomePanels();
+  loadFromStorage();
+  if (studies.length === 0) {
+    studies.push(createEmptyStudy());
+    saveToStorage();
+  }
+  refreshStudySelector();
+  loadStudy(0);
+}
+
+function createEmptyStudy() {
+  return { _id: Date.now().toString(36) + Math.random().toString(36).slice(2,6), _label: 'New Study' };
+}
+
+// ---- Build outcome panels ----
+function buildOutcomePanels() {
+  const container = document.getElementById('outcomePanels');
+  OUTCOMES.forEach((oc, i) => {
+    const panel = document.createElement('div');
+    panel.className = 'outcome-panel' + (i === 0 ? ' active' : '');
+    panel.id = 'outcome-' + oc.id;
+    panel.innerHTML = buildOutcomeHTML(oc);
+    container.appendChild(panel);
+  });
+}
+
+function buildOutcomeHTML(oc) {
+  const p = oc.id;
+  let html = '';
+
+  // 2x2 counts
+  html += `<div class="sub-label">Event Counts</div>`;
+  html += `<div class="psc-overlap-grid" style="grid-template-columns: 180px 1fr 1fr;">
+    <div></div><div class="col-label">PSC</div><div class="col-label">Overlap</div>
+    <div class="row-label">Event occurred — N</div>
+    <input type="text" data-key="${p}_event_psc" placeholder="N">
+    <input type="text" data-key="${p}_event_overlap" placeholder="N">
+    <div class="row-label">Event did not occur — N</div>
+    <input type="text" data-key="${p}_noevent_psc" placeholder="N">
+    <input type="text" data-key="${p}_noevent_overlap" placeholder="N">
+  </div>`;
+
+  // Effect estimates — checkboxes
+  html += `<div class="sub-label">Effect Estimates (select all that apply)</div>`;
+  html += `<div class="checkbox-group">`;
+  EFFECT_TYPES.forEach(et => {
+    html += `<label><input type="checkbox" data-key="${p}_has_${et.id}" onchange="toggleEffect('${p}','${et.id}', this.checked)"> ${et.label}</label>`;
+  });
+  html += `</div>`;
+
+  // Effect estimate fields (hidden by default)
+  EFFECT_TYPES.forEach(et => {
+    html += `<div class="effect-block hidden" id="effect-${p}-${et.id}">
+      <div class="effect-title">${et.label}</div>
+      <div class="effect-fields">
+        <div class="field"><label>Estimate</label><input type="text" data-key="${p}_${et.id}_est" placeholder="e.g. 1.85"></div>
+        <div class="field"><label>95% CI lower</label><input type="text" data-key="${p}_${et.id}_ci_lo" placeholder="e.g. 0.92"></div>
+        <div class="field"><label>95% CI upper</label><input type="text" data-key="${p}_${et.id}_ci_hi" placeholder="e.g. 3.71"></div>
+        <div class="field"><label>p-value</label><input type="text" data-key="${p}_${et.id}_p" placeholder="e.g. 0.08"></div>
+      </div>
+    </div>`;
+  });
+
+  // Covariates (shown when any adjusted is checked)
+  html += `<div class="field-row hidden" id="covariates-${p}" style="margin-top:8px;">
+    <div class="field full"><label>Covariates adjusted for</label>
+    <input type="text" data-key="${p}_covariates" placeholder="e.g. age, sex, medical therapy"></div>
+  </div>`;
+
+  // Survival
+  html += `<div class="sub-label">${oc.survLabel}</div>`;
+  html += `<div class="psc-overlap-grid" style="grid-template-columns: 180px 1fr 1fr;">
+    <div></div><div class="col-label">PSC</div><div class="col-label">Overlap</div>
+    <div class="row-label">5-year (%, 95% CI)</div>
+    <input type="text" data-key="${p}_surv5_psc" placeholder="e.g. 96%">
+    <input type="text" data-key="${p}_surv5_overlap" placeholder="e.g. 72%">
+    <div class="row-label">10-year (%, 95% CI)</div>
+    <input type="text" data-key="${p}_surv10_psc" placeholder="e.g. 72%">
+    <input type="text" data-key="${p}_surv10_overlap" placeholder="e.g. 72%">
+    <div class="row-label">15-year (%, 95% CI)</div>
+    <input type="text" data-key="${p}_surv15_psc">
+    <input type="text" data-key="${p}_surv15_overlap">
+    <div class="row-label">20-year (%, 95% CI)</div>
+    <input type="text" data-key="${p}_surv20_psc">
+    <input type="text" data-key="${p}_surv20_overlap">
+    <div class="row-label">Median survival</div>
+    <input type="text" data-key="${p}_surv_median_psc" placeholder="e.g. 12.7 years">
+    <input type="text" data-key="${p}_surv_median_overlap">
+    <div class="row-label">Other (specify)</div>
+    <input type="text" data-key="${p}_surv_other_psc">
+    <input type="text" data-key="${p}_surv_other_overlap">
+  </div>`;
+
+  // Outcome notes
+  html += `<div class="field-row" style="margin-top:8px;">
+    <div class="field full"><label>Notes for this outcome</label>
+    <input type="text" data-key="${p}_notes"></div>
+  </div>`;
+
+  return html;
+}
+
+// ---- Outcome tabs ----
+function switchOutcome(idx, btn) {
+  document.querySelectorAll('.outcome-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.outcome-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.outcome-panel')[idx].classList.add('active');
+}
+
+// ---- Toggle helpers ----
+function toggleSection(header) {
+  header.parentElement.classList.toggle('collapsed');
+}
+
+function toggleOtherDesign(sel) {
+  document.getElementById('otherDesignField').classList.toggle('hidden', sel.value !== 'Other');
+}
+
+function toggleEffect(outcomeId, effectId, show) {
+  document.getElementById(`effect-${outcomeId}-${effectId}`).classList.toggle('hidden', !show);
+  // Show covariates row if any adjusted effect is checked
+  const anyAdj = EFFECT_TYPES.filter(e => e.id.startsWith('adj')).some(e => {
+    const cb = document.querySelector(`[data-key="${outcomeId}_has_${e.id}"]`);
+    return cb && cb.checked;
+  });
+  document.getElementById(`covariates-${outcomeId}`).classList.toggle('hidden', !anyAdj);
+}
+
+// ---- Dynamic "other treatment" rows ----
+let otherTxCounter = 0;
+
+function addOtherTxRow(nameVal, pscVal, overlapVal, totalVal) {
+  otherTxCounter++;
+  const container = document.getElementById('tx-other-rows');
+  const row = document.createElement('div');
+  row.className = 'other-tx-row';
+  row.style.cssText = 'display:flex; gap:8px; align-items:center; margin-bottom:6px; flex-wrap:wrap;';
+  row.innerHTML = `
+    <input type="text" placeholder="Treatment name" style="flex:0 0 170px; padding:5px 7px; border:1px solid #ccc; border-radius:4px; font-size:13px;" class="otx-name" value="${nameVal || ''}">
+    <input type="text" placeholder="PSC — N (%)" style="flex:1; min-width:90px; padding:5px 7px; border:1px solid #ccc; border-radius:4px; font-size:13px;" class="otx-psc" value="${pscVal || ''}">
+    <input type="text" placeholder="Overlap — N (%)" style="flex:1; min-width:90px; padding:5px 7px; border:1px solid #ccc; border-radius:4px; font-size:13px;" class="otx-overlap" value="${overlapVal || ''}">
+    <input type="text" placeholder="Total — N (%)" style="flex:1; min-width:90px; padding:5px 7px; border:1px solid #ccc; border-radius:4px; font-size:13px;" class="otx-total" value="${totalVal || ''}">
+    <button type="button" onclick="this.parentElement.remove()" style="padding:3px 8px; font-size:16px; border:1px solid #e6b0aa; border-radius:4px; background:#fff; color:#c0392b; cursor:pointer; line-height:1;" title="Remove">&times;</button>
+  `;
+  container.appendChild(row);
+}
+
+function collectOtherTx() {
+  const rows = [];
+  document.querySelectorAll('#tx-other-rows .other-tx-row').forEach(row => {
+    rows.push({
+      name: row.querySelector('.otx-name').value,
+      psc: row.querySelector('.otx-psc').value,
+      overlap: row.querySelector('.otx-overlap').value,
+      total: row.querySelector('.otx-total').value
+    });
+  });
+  return rows;
+}
+
+function restoreOtherTx(data) {
+  document.getElementById('tx-other-rows').innerHTML = '';
+  otherTxCounter = 0;
+  if (data && Array.isArray(data)) {
+    data.forEach(r => addOtherTxRow(r.name, r.psc, r.overlap, r.total));
+  }
+}
+
+function toggleMeasureFields(prefix, format) {
+  const container = document.getElementById(`${prefix}-fields-psc-overlap`);
+  const meanRow = document.getElementById(`${prefix}-mean-row`);
+  const medianRow = document.getElementById(`${prefix}-median-row`);
+  const otherRow = document.getElementById(`${prefix}-other-row`);
+
+  if (!format || format === 'nr') {
+    container.classList.add('hidden');
+    return;
+  }
+  container.classList.remove('hidden');
+
+  const showMean = ['mean_sd', 'mean_range', 'mean_median'].includes(format);
+  const showMedian = ['median_iqr', 'median_range', 'mean_median'].includes(format);
+  const showOther = format === 'other';
+
+  meanRow.classList.toggle('hidden', !showMean);
+  medianRow.classList.toggle('hidden', !showMedian);
+  otherRow.classList.toggle('hidden', !showOther);
+}
+
+// ---- Data binding ----
+function collectFormData() {
+  const data = {};
+  document.querySelectorAll('[data-key]').forEach(el => {
+    const key = el.dataset.key;
+    if (el.type === 'checkbox') {
+      data[key] = el.checked;
+    } else {
+      data[key] = el.value;
+    }
+  });
+  // Collect dynamic other-treatment rows
+  data._otherTx = collectOtherTx();
+  // Generate label
+  const author = data.first_author || '';
+  const year = data.pub_year || '';
+  data._label = (author && year) ? `${author} ${year}` : (author || year || 'New Study');
+  return data;
+}
+
+function populateForm(data) {
+  document.querySelectorAll('[data-key]').forEach(el => {
+    const key = el.dataset.key;
+    if (el.type === 'checkbox') {
+      el.checked = !!data[key];
+    } else {
+      el.value = data[key] || '';
+    }
+  });
+  // Trigger visibility updates
+  const designSel = document.querySelector('[data-key="study_design"]');
+  if (designSel) toggleOtherDesign(designSel);
+
+  ['age', 'fu'].forEach(prefix => {
+    const fmt = document.querySelector(`[data-key="${prefix}_format"]`);
+    if (fmt) toggleMeasureFields(prefix, fmt.value);
+  });
+
+  restoreOtherTx(data._otherTx);
+
+  OUTCOMES.forEach(oc => {
+    EFFECT_TYPES.forEach(et => {
+      const cb = document.querySelector(`[data-key="${oc.id}_has_${et.id}"]`);
+      if (cb) toggleEffect(oc.id, et.id, cb.checked);
+    });
+  });
+}
+
+// ---- Study CRUD ----
+function saveStudy() {
+  const data = collectFormData();
+  const existing = studies[currentStudyIdx] || {};
+  data._id = existing._id || createEmptyStudy()._id;
+  studies[currentStudyIdx] = data;
+  saveToStorage();
+  refreshStudySelector();
+  showStatus('Saved');
+}
+
+function newStudy() {
+  saveStudy();
+  studies.push(createEmptyStudy());
+  currentStudyIdx = studies.length - 1;
+  populateForm({});
+  saveToStorage();
+  refreshStudySelector();
+}
+
+function duplicateStudy() {
+  saveStudy();
+  const copy = JSON.parse(JSON.stringify(studies[currentStudyIdx]));
+  copy._id = createEmptyStudy()._id;
+  copy._label = copy._label + ' (copy)';
+  studies.push(copy);
+  currentStudyIdx = studies.length - 1;
+  populateForm(copy);
+  saveToStorage();
+  refreshStudySelector();
+  showStatus('Duplicated');
+}
+
+function deleteStudy() {
+  if (studies.length <= 1) {
+    if (!confirm('Delete the only study and start fresh?')) return;
+    studies = [createEmptyStudy()];
+    currentStudyIdx = 0;
+  } else {
+    const label = studies[currentStudyIdx]._label || 'this study';
+    if (!confirm(`Delete "${label}"?`)) return;
+    studies.splice(currentStudyIdx, 1);
+    currentStudyIdx = Math.min(currentStudyIdx, studies.length - 1);
+  }
+  populateForm(studies[currentStudyIdx]);
+  saveToStorage();
+  refreshStudySelector();
+}
+
+function loadStudy(idx) {
+  // Auto-save current before switching
+  if (studies[currentStudyIdx]) {
+    const data = collectFormData();
+    data._id = studies[currentStudyIdx]._id;
+    studies[currentStudyIdx] = data;
+  }
+  currentStudyIdx = parseInt(idx);
+  populateForm(studies[currentStudyIdx] || {});
+  document.getElementById('studySelect').value = currentStudyIdx;
+}
+
+function refreshStudySelector() {
+  const sel = document.getElementById('studySelect');
+  sel.innerHTML = '';
+  studies.forEach((s, i) => {
+    const opt = document.createElement('option');
+    opt.value = i;
+    opt.textContent = `${i + 1}. ${s._label || 'New Study'}`;
+    sel.appendChild(opt);
+  });
+  sel.value = currentStudyIdx;
+}
+
+// ---- Storage ----
+function saveToStorage() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(studies));
+  } catch (e) {
+    console.error('Storage error:', e);
+  }
+}
+
+function loadFromStorage() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) studies = JSON.parse(raw);
+  } catch (e) {
+    console.error('Load error:', e);
+    studies = [];
+  }
+}
+
+function showStatus(msg) {
+  const el = document.getElementById('saveStatus');
+  el.textContent = msg + ' — ' + new Date().toLocaleTimeString();
+  setTimeout(() => { el.textContent = ''; }, 4000);
+}
+
+// ---- Export CSV ----
+function flattenOtherTx(otherTx) {
+  // Flatten dynamic other-treatment rows into keyed columns for CSV
+  const flat = {};
+  if (!otherTx || !Array.isArray(otherTx)) return flat;
+  otherTx.forEach((r, i) => {
+    const n = i + 1;
+    flat[`tx_other${n}_name`] = r.name || '';
+    flat[`tx_other${n}_psc`] = r.psc || '';
+    flat[`tx_other${n}_overlap`] = r.overlap || '';
+    flat[`tx_other${n}_total`] = r.total || '';
+  });
+  return flat;
+}
+
+function exportCSV() {
+  saveStudy();
+  if (studies.length === 0) return;
+
+  // Build flattened copies with other-tx rows expanded
+  const flat = studies.map(s => {
+    const copy = {};
+    Object.keys(s).forEach(k => {
+      if (!k.startsWith('_')) copy[k] = s[k];
+    });
+    Object.assign(copy, flattenOtherTx(s._otherTx));
+    return copy;
+  });
+
+  // Collect all keys across all flattened studies
+  const allKeys = new Set();
+  flat.forEach(s => Object.keys(s).forEach(k => allKeys.add(k)));
+  const keys = Array.from(allKeys).sort();
+
+  let csv = keys.map(k => `"${k}"`).join(',') + '\n';
+  flat.forEach(s => {
+    csv += keys.map(k => {
+      let v = s[k];
+      if (v === undefined || v === null) v = '';
+      if (typeof v === 'boolean') v = v ? 'Yes' : 'No';
+      return `"${String(v).replace(/"/g, '""')}"`;
+    }).join(',') + '\n';
+  });
+
+  downloadFile(csv, 'data_extraction_' + dateStamp() + '.csv', 'text/csv');
+}
+
+// ---- Export / Import JSON ----
+function exportJSON() {
+  saveStudy();
+  const json = JSON.stringify(studies, null, 2);
+  downloadFile(json, 'data_extraction_' + dateStamp() + '.json', 'application/json');
+}
+
+let importMode = 'replace';
+
+function importJSON(mode) {
+  importMode = mode || 'replace';
+  document.getElementById('importFile').click();
+}
+
+function handleImport(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const imported = JSON.parse(e.target.result);
+      if (!Array.isArray(imported)) throw new Error('Expected array');
+
+      if (importMode === 'merge') {
+        saveStudy();
+        const before = studies.length;
+        imported.forEach(s => {
+          s._id = Date.now().toString(36) + Math.random().toString(36).slice(2,6);
+          studies.push(s);
+        });
+        saveToStorage();
+        refreshStudySelector();
+        showStatus(`Merged ${imported.length} studies (${before} existing + ${imported.length} new = ${studies.length} total)`);
+      } else {
+        if (!confirm(`Import ${imported.length} study/studies? This will replace all current data.`)) return;
+        studies = imported;
+        currentStudyIdx = 0;
+        populateForm(studies[0] || {});
+        saveToStorage();
+        refreshStudySelector();
+        showStatus('Imported ' + imported.length + ' studies');
+      }
+    } catch (err) {
+      alert('Import error: ' + err.message);
+    }
+  };
+  reader.readAsText(file);
+  event.target.value = '';
+}
+
+// ---- Helpers ----
+function downloadFile(content, filename, type) {
+  const blob = new Blob([content], { type });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function dateStamp() {
+  return new Date().toISOString().slice(0, 10).replace(/-/g, '');
+}
+
+// Auto-save on input
+document.addEventListener('input', () => {
+  clearTimeout(window._autoSaveTimer);
+  window._autoSaveTimer = setTimeout(() => {
+    saveStudy();
+  }, 2000);
+});
+
+// Keyboard shortcut: Ctrl+S
+document.addEventListener('keydown', (e) => {
+  if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+    e.preventDefault();
+    saveStudy();
+  }
+});
+
+init();
+</script>
+</body>
+</html>
