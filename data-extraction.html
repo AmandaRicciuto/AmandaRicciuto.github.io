@@ -234,6 +234,74 @@
   .effect-fields .field { flex: 0 0 auto; }
   .effect-fields input { width: 100px; }
 
+  /* Risk of Bias grid */
+  .rob-grid {
+    display: grid;
+    grid-template-columns: 1fr 130px 1fr;
+    gap: 8px 12px;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  .rob-grid select, .rob-grid input {
+    padding: 5px 7px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 13px;
+    width: 100%;
+  }
+  .rob-grid select:focus, .rob-grid input:focus {
+    outline: none;
+    border-color: #1a5276;
+    box-shadow: 0 0 0 2px rgba(26,82,118,0.15);
+  }
+  .rob-domain-label {
+    font-size: 13px;
+    color: #333;
+    line-height: 1.35;
+  }
+  .rob-hint {
+    font-size: 11px;
+    color: #888;
+    font-weight: normal;
+  }
+  .rob-overall-box {
+    background: #f9fafb;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 12px 14px;
+  }
+  .rob-overall-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .rob-overall-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #333;
+  }
+  .rob-overall-badge {
+    display: inline-block;
+    padding: 3px 12px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 600;
+    background: #eee;
+    color: #666;
+  }
+  .rob-overall-badge.low { background: #d4edda; color: #155724; }
+  .rob-overall-badge.some-concerns { background: #fff3cd; color: #856404; }
+  .rob-overall-badge.high { background: #f8d7da; color: #721c24; }
+  .rob-overall-badge.very-high { background: #c0392b; color: #fff; }
+  .rob-algorithm-note {
+    font-size: 11px;
+    color: #888;
+    margin: 6px 0 0;
+  }
+  @media (max-width: 700px) {
+    .rob-grid { grid-template-columns: 1fr; }
+  }
+
   .hidden { display: none !important; }
 
   /* Outcome tab nav */
@@ -554,10 +622,144 @@
     </div>
   </div>
 
-  <!-- Section 5: Notes -->
+  <!-- Section 5: Risk of Bias (ROBINS-E) -->
+  <div class="section" id="sec-rob">
+    <div class="section-header" onclick="toggleSection(this)">
+      <h2>E. Risk of Bias Assessment (ROBINS-E)</h2>
+      <span class="toggle">&#9662;</span>
+    </div>
+    <div class="section-body">
+
+      <div class="sub-label">Domain Assessments</div>
+      <p style="font-size:12px; color:#666; margin:0 0 10px;">For each domain, select: <strong>No</strong> (low risk), <strong>Cannot tell</strong>, <strong>Yes</strong> (risk present), or <strong>N/A</strong>.</p>
+
+      <div class="rob-grid">
+        <div class="rob-domain-label" style="font-weight:600; color:#555;">Domain</div>
+        <div style="font-weight:600; color:#555; text-align:center;">Judgement</div>
+        <div style="font-weight:600; color:#555;">Support for judgement</div>
+
+        <div class="rob-domain-label">D1 — Confounding<br><span class="rob-hint">(medication, IBD, age, sex, PSC severity, small vs large duct)</span></div>
+        <select data-key="rob_d1" onchange="updateRobOverall()">
+          <option value="">—</option>
+          <option value="No">No</option>
+          <option value="Cannot tell">Cannot tell</option>
+          <option value="Yes">Yes</option>
+          <option value="N/A">N/A</option>
+        </select>
+        <input type="text" data-key="rob_d1_support" placeholder="Rationale...">
+
+        <div class="rob-domain-label">D2 — Measurement of exposure<br><span class="rob-hint">(AIH overlap definition/ascertainment)</span></div>
+        <select data-key="rob_d2" onchange="updateRobOverall()">
+          <option value="">—</option>
+          <option value="No">No</option>
+          <option value="Cannot tell">Cannot tell</option>
+          <option value="Yes">Yes</option>
+          <option value="N/A">N/A</option>
+        </select>
+        <input type="text" data-key="rob_d2_support" placeholder="Rationale...">
+
+        <div class="rob-domain-label">D3 — Selection of participants</div>
+        <select data-key="rob_d3" onchange="updateRobOverall()">
+          <option value="">—</option>
+          <option value="No">No</option>
+          <option value="Cannot tell">Cannot tell</option>
+          <option value="Yes">Yes</option>
+          <option value="N/A">N/A</option>
+        </select>
+        <input type="text" data-key="rob_d3_support" placeholder="Rationale...">
+
+        <div class="rob-domain-label">D4 — Post-exposure interventions</div>
+        <select data-key="rob_d4" onchange="updateRobOverall()">
+          <option value="">—</option>
+          <option value="No">No</option>
+          <option value="Cannot tell">Cannot tell</option>
+          <option value="Yes">Yes</option>
+          <option value="N/A">N/A</option>
+        </select>
+        <input type="text" data-key="rob_d4_support" placeholder="Rationale...">
+
+        <div class="rob-domain-label">D5 — Missing data</div>
+        <select data-key="rob_d5" onchange="updateRobOverall()">
+          <option value="">—</option>
+          <option value="No">No</option>
+          <option value="Cannot tell">Cannot tell</option>
+          <option value="Yes">Yes</option>
+          <option value="N/A">N/A</option>
+        </select>
+        <input type="text" data-key="rob_d5_support" placeholder="Rationale...">
+
+        <div class="rob-domain-label">D6 — Measurement of outcomes</div>
+        <select data-key="rob_d6" onchange="updateRobOverall()">
+          <option value="">—</option>
+          <option value="No">No</option>
+          <option value="Cannot tell">Cannot tell</option>
+          <option value="Yes">Yes</option>
+          <option value="N/A">N/A</option>
+        </select>
+        <input type="text" data-key="rob_d6_support" placeholder="Rationale...">
+
+        <div class="rob-domain-label">D7 — Selection of reported result</div>
+        <select data-key="rob_d7" onchange="updateRobOverall()">
+          <option value="">—</option>
+          <option value="No">No</option>
+          <option value="Cannot tell">Cannot tell</option>
+          <option value="Yes">Yes</option>
+          <option value="N/A">N/A</option>
+        </select>
+        <input type="text" data-key="rob_d7_support" placeholder="Rationale...">
+      </div>
+
+      <div class="sub-label" style="margin-top:16px;">Overall Judgement</div>
+
+      <div class="rob-overall-box" id="robOverallBox">
+        <div class="rob-overall-row">
+          <span class="rob-overall-label">Auto-calculated overall risk of bias:</span>
+          <span class="rob-overall-badge" id="robOverallBadge">—</span>
+        </div>
+        <p class="rob-algorithm-note">
+          <strong>Low risk:</strong> all No / N/A &nbsp;|&nbsp;
+          <strong>Some concerns:</strong> 1–2 Cannot tell, rest No &nbsp;|&nbsp;
+          <strong>High risk:</strong> 1 Yes &nbsp;|&nbsp;
+          <strong>Very high risk:</strong> 2+ Yes
+        </p>
+      </div>
+
+      <div class="field-row" style="margin-top:10px;">
+        <div class="field half">
+          <label>Overall risk of bias (override if needed)</label>
+          <select data-key="rob_overall">
+            <option value="">— Auto —</option>
+            <option value="Low risk">Low risk</option>
+            <option value="Some concerns">Some concerns</option>
+            <option value="High risk">High risk</option>
+            <option value="Very high risk">Very high risk</option>
+          </select>
+        </div>
+        <div class="field half">
+          <label>Does overall RoB threaten conclusions?</label>
+          <select data-key="rob_threatens">
+            <option value="">— Select —</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+            <option value="Cannot tell">Cannot tell</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field full">
+          <label>Risk of bias notes</label>
+          <textarea data-key="rob_notes" rows="2" placeholder="Additional comments on risk of bias..."></textarea>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Section 6: Notes -->
   <div class="section" id="sec-notes">
     <div class="section-header" onclick="toggleSection(this)">
-      <h2>E. Notes</h2>
+      <h2>F. Notes</h2>
       <span class="toggle">&#9662;</span>
     </div>
     <div class="section-body">
@@ -796,6 +998,41 @@ function toggleMeasureFields(prefix, format) {
   otherRow.classList.toggle('hidden', !showOther);
 }
 
+// ---- Risk of Bias auto-calculation ----
+function updateRobOverall() {
+  const domains = ['rob_d1','rob_d2','rob_d3','rob_d4','rob_d5','rob_d6','rob_d7'];
+  const vals = domains.map(d => {
+    const el = document.querySelector(`[data-key="${d}"]`);
+    return el ? el.value : '';
+  });
+
+  const badge = document.getElementById('robOverallBadge');
+  const filled = vals.filter(v => v !== '');
+  if (filled.length === 0) {
+    badge.textContent = '—';
+    badge.className = 'rob-overall-badge';
+    return;
+  }
+
+  const yesCount = vals.filter(v => v === 'Yes').length;
+  const ctCount = vals.filter(v => v === 'Cannot tell').length;
+  const noOrNa = vals.filter(v => v === 'No' || v === 'N/A').length;
+
+  let level, cls;
+  if (yesCount >= 2) {
+    level = 'Very high risk'; cls = 'very-high';
+  } else if (yesCount === 1) {
+    level = 'High risk'; cls = 'high';
+  } else if (ctCount >= 1) {
+    level = 'Some concerns'; cls = 'some-concerns';
+  } else {
+    level = 'Low risk'; cls = 'low';
+  }
+
+  badge.textContent = level;
+  badge.className = 'rob-overall-badge ' + cls;
+}
+
 // ---- Data binding ----
 function collectFormData() {
   const data = {};
@@ -842,6 +1079,9 @@ function populateForm(data) {
       if (cb) toggleEffect(oc.id, et.id, cb.checked);
     });
   });
+
+  // Update RoB auto-calculation
+  updateRobOverall();
 }
 
 // ---- Study CRUD ----
