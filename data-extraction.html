@@ -870,6 +870,7 @@ const EFFECT_TYPES = [
 
 const STORAGE_KEY = 'sr_data_extraction';
 const API_URL_KEY = 'sr_sheet_api_url';
+const DEFAULT_API_URL = 'https://script.google.com/macros/s/AKfycbxffvdkenuHQ0TZC9aysSVD7R7lbfWDGeJP5vpBlXRPpnplHwsDIomzSWseJ2DNw_4a-w/exec';
 let studies = [];
 let currentStudyIdx = 0;
 let cloudSyncPending = false;
@@ -885,15 +886,9 @@ function init() {
   }
   refreshStudySelector();
   loadStudy(0);
-  // Try cloud load
-  const apiUrl = localStorage.getItem(API_URL_KEY);
-  if (apiUrl) {
-    document.getElementById('setupBanner').classList.add('hidden');
-    loadFromCloud();
-  } else {
-    document.getElementById('setupBanner').classList.remove('hidden');
-    setCloudStatus('offline', 'Not connected');
-  }
+  // Always connect to cloud
+  document.getElementById('setupBanner').classList.add('hidden');
+  loadFromCloud();
 }
 
 function createEmptyStudy() {
@@ -1281,7 +1276,7 @@ function showStatus(msg) {
 
 // ---- Cloud sync ----
 function getApiUrl() {
-  return localStorage.getItem(API_URL_KEY) || '';
+  return localStorage.getItem(API_URL_KEY) || DEFAULT_API_URL;
 }
 
 function setApiUrl() {
