@@ -1,0 +1,87 @@
+// ============================================================
+// Google Apps Script — Data Extraction Cloud Backend
+// Paste this entire script into Extensions > Apps Script
+// then Deploy > New deployment > Web app
+//   Execute as: Me
+//   Who has access: Anyone
+// ============================================================
+
+const SHEET_NAME = 'Data';
+
+function getOrCreateSheet() {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  let sheet = ss.getSheetByName(SHEET_NAME);
+  if (!sheet) {
+    sheet = ss.insertSheet(SHEET_NAME);
+    sheet.getRange(1, 1, 1, 4).setValues([['Study ID', 'Label', 'JSON', 'Last Modified']]);
+    sheet.setColumnWidth(1, 140);
+    sheet.setColumnWidth(2, 200);
+    sheet.setColumnWidth(3, 400);
+    sheet.setColumnWidth(4, 180);
+  }
+  return sheet;
+}
+
+function doGet(e) {
+  const sheet = getOrCreateSheet();
+  const lastRow = sheet.getLastRow();
+
+  if (lastRow < 2) {
+    return ContentService.createTextOutput('[]')
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+
+  const data = sheet.getRange(2, 3, lastRow - 1, 1).getValues();
+  const studies = [];
+  for (let i = 0; i < data.length; i++) {
+    try {
+      if (data[i][0]) studies.push(JSON.parse(data[i][0]));
+    } catch (err) {
+      // skip malformed rows
+    }
+  }
+
+  return ContentService.createTextOutput(JSON.stringify(studies))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
+function doPost(e) {
+  const lock = LockService.getScriptLock();
+  lock.waitLock(15000);
+
+  try {
+    const sheet = getOrCreateSheet();
+    const studies = JSON.parse(e.postData.contents);
+
+    // Clear old data rows (keep header)
+    const lastRow = sheet.getLastRow();
+    if (lastRow > 1) {
+      sheet.getRange(2, 1, lastRow - 1, 4).clear();
+    }
+
+    // Write each study as a row
+    if (studies.length > 0) {
+      const now = new Date().toISOString();
+      const rows = studies.map(function(s) {
+        return [
+          s._id || '',
+          s._label || 'Untitled',
+          JSON.stringify(s),
+          now
+        ];
+      });
+      sheet.getRange(2, 1, rows.length, 4).setValues(rows);
+    }
+
+    lock.releaseLock();
+    return ContentService.createTextOutput(
+      JSON.stringify({ status: 'ok', count: studies.length })
+    ).setMimeType(ContentService.MimeType.JSON);
+
+  } catch (err) {
+    lock.releaseLock();
+    return ContentService.createTextOutput(
+      JSON.stringify({ status: 'error', message: err.message })
+    ).setMimeType(ContentService.MimeType.JSON);
+  }
+}
