@@ -678,9 +678,10 @@
       <div class="outcome-tabs" id="outcomeTabs">
         <button class="outcome-tab active" onclick="switchOutcome(0, this)">Liver Transplant</button>
         <button class="outcome-tab" onclick="switchOutcome(1, this)">Death</button>
-        <button class="outcome-tab" onclick="switchOutcome(2, this)">Any Cancer</button>
-        <button class="outcome-tab" onclick="switchOutcome(3, this)">HPB Cancer</button>
-        <button class="outcome-tab" onclick="switchOutcome(4, this)">CRC</button>
+        <button class="outcome-tab" onclick="switchOutcome(2, this)">LT or Death</button>
+        <button class="outcome-tab" onclick="switchOutcome(3, this)">Any Cancer</button>
+        <button class="outcome-tab" onclick="switchOutcome(4, this)">HPB Cancer</button>
+        <button class="outcome-tab" onclick="switchOutcome(5, this)">CRC</button>
       </div>
       <div id="outcomePanels"></div>
     </div>
@@ -850,8 +851,9 @@
 
 <script>
 const OUTCOMES = [
-  { id: 'lt', label: 'Liver Transplant', survLabel: 'Transplant-free survival' },
+  { id: 'lt', label: 'Liver Transplant', survLabel: 'Transplant survival' },
   { id: 'death', label: 'Death', survLabel: 'Overall survival' },
+  { id: 'lt_death', label: 'LT or Death', survLabel: 'Transplant-free survival' },
   { id: 'any_ca', label: 'Any Cancer', survLabel: 'Cancer-free survival' },
   { id: 'hpb_ca', label: 'HPB Cancer', survLabel: 'HPB cancer-free survival' },
   { id: 'crc', label: 'Colorectal Cancer', survLabel: 'CRC-free survival' }
