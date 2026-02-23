@@ -926,18 +926,25 @@ function buildOutcomeHTML(oc) {
     <input type="text" data-key="${p}_noevent_overlap" placeholder="N">
   </div>`;
 
-  // Effect estimates — checkboxes
+  // Effect estimates — comparison direction + checkboxes
   html += `<div class="sub-label">Effect Estimates (select all that apply)</div>`;
-  html += `<p style="font-size:12px; color:#666; margin:0 0 6px;">Convention: report as <strong>Overlap vs PSC (reference)</strong>. HR/OR &gt;1 = overlap has higher risk; &lt;1 = overlap has lower risk. If the study uses the opposite direction, note this in the reference group field below.</p>`;
   html += `<div class="field-row" style="margin-bottom:8px;">
-    <div class="field half"><label>Reference group (as reported in study)</label>
-    <select data-key="${p}_ref_group">
+    <div class="field half"><label>Comparison group (the group the estimate reflects)</label>
+    <select data-key="${p}_comparison_group">
       <option value="">— Select —</option>
-      <option value="PSC (reference) vs Overlap">PSC is reference (Overlap vs PSC)</option>
-      <option value="Overlap (reference) vs PSC">Overlap is reference (PSC vs Overlap)</option>
+      <option value="Overlap">PSC-AIH Overlap</option>
+      <option value="PSC">PSC</option>
+      <option value="Other">Other (specify in notes)</option>
+    </select></div>
+    <div class="field half"><label>Reference group</label>
+    <select data-key="${p}_reference_group">
+      <option value="">— Select —</option>
+      <option value="PSC">PSC</option>
+      <option value="Overlap">PSC-AIH Overlap</option>
       <option value="Other">Other (specify in notes)</option>
     </select></div>
   </div>`;
+  html += `<p style="font-size:11px; color:#888; margin:-4px 0 8px;">e.g. if HR = 0.81 for Overlap vs PSC (ref), select Comparison = "PSC-AIH Overlap", Reference = "PSC". HR &gt;1 means the comparison group has higher risk.</p>`;
   html += `<div class="checkbox-group">`;
   EFFECT_TYPES.forEach(et => {
     html += `<label><input type="checkbox" data-key="${p}_has_${et.id}" onchange="toggleEffect('${p}','${et.id}', this.checked)"> ${et.label}</label>`;
