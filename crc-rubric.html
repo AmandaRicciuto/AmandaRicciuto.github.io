@@ -47,6 +47,31 @@
     margin: 10px 0 0;
   }
 
+  /* Cloud status bar */
+  .cloud-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 8px 16px;
+    margin-bottom: 16px;
+    border-radius: 6px;
+    font-size: 13px;
+    background: #eee;
+    color: #666;
+  }
+  .cloud-bar.saving { background: #fff3cd; color: #856404; }
+  .cloud-bar.saved { background: #d4edda; color: #155724; }
+  .cloud-bar.error { background: #f8d7da; color: #721c24; }
+  .cloud-bar .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: #999; display: inline-block;
+  }
+  .cloud-bar.saving .dot { background: #856404; animation: pulse 1s infinite; }
+  .cloud-bar.saved .dot { background: #28a745; }
+  .cloud-bar.error .dot { background: #c0392b; }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+
   /* Sections */
   .section {
     background: #fff;
@@ -244,29 +269,11 @@
   .submit-status.success { color: #1e7e34; font-weight: 600; }
   .submit-status.error { color: #c0392b; }
 
-  /* Config banner */
-  .config-banner {
-    background: #fff3cd;
-    border: 1px solid #ffc107;
-    border-radius: 6px;
-    padding: 12px 16px;
-    margin-bottom: 16px;
-    font-size: 13px;
-    color: #856404;
-  }
-  .config-banner code {
-    background: #f8f0d8;
-    padding: 1px 5px;
-    border-radius: 3px;
-    font-size: 12px;
-  }
-  .config-banner.hidden { display: none; }
-
   /* Print styles */
   @media print {
     body { background: #fff; padding: 0; }
     .section { break-inside: avoid; }
-    .submit-area, .config-banner { display: none; }
+    .submit-area, .cloud-bar { display: none; }
   }
 </style>
 </head>
@@ -277,13 +284,12 @@
   <div class="header">
     <h1>CIDsCaNN Clinical Research Committee</h1>
     <h2>Proposal Evaluation Rubric</h2>
-    <p>Please complete all sections and submit your evaluation. Responses are automatically collated.</p>
+    <p>Please complete all sections and submit your evaluation. Your progress is automatically saved and can be resumed from any device.</p>
   </div>
 
-  <div id="configBanner" class="config-banner">
-    <strong>Setup required:</strong> To enable automatic submission to Google Sheets, replace the
-    <code>GOOGLE_SCRIPT_URL</code> value in the page source with your deployed Google Apps Script URL.
-    See the setup instructions in the page comments.
+  <div class="cloud-bar" id="cloudBar">
+    <span class="dot"></span>
+    <span id="cloudText">Checking connection...</span>
   </div>
 
   <!-- Proposal Info -->
@@ -505,92 +511,64 @@
 </div>
 
 <script>
-/*
- * ============================================================
- * GOOGLE SHEETS BACKEND SETUP INSTRUCTIONS
- * ============================================================
- *
- * 1. Go to https://sheets.google.com and create a new spreadsheet.
- *    Name it something like "CIDsCaNN CRC Proposal Evaluations".
- *
- * 2. In row 1, add these column headers (in order):
- *    Timestamp | Proposal Title | Investigators | Date Reviewed |
- *    Reviewer | Role | Feasibility | Feasibility Comments |
- *    Methodology | Methodology Feedback | Funding | Funding Comments |
- *    Resources | Resources Comments | Priority | Priority Comments |
- *    Recommendation | Overall Comments
- *
- * 3. Go to Extensions > Apps Script.
- *
- * 4. Replace the default code with:
- *
- *    function doPost(e) {
- *      var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
- *      var data = JSON.parse(e.postData.contents);
- *      sheet.appendRow([
- *        new Date(),
- *        data.proposalTitle,
- *        data.investigators,
- *        data.dateReviewed,
- *        data.reviewerName,
- *        data.reviewerRole,
- *        data.feasibility,
- *        data.feasibilityComments,
- *        data.methodology,
- *        data.methodologyFeedback,
- *        data.funding,
- *        data.fundingComments,
- *        data.resources,
- *        data.resourcesComments,
- *        data.priority,
- *        data.priorityComments,
- *        data.recommendation,
- *        data.overallComments
- *      ]);
- *      return ContentService
- *        .createTextOutput(JSON.stringify({status: 'ok'}))
- *        .setMimeType(ContentService.MimeType.JSON);
- *    }
- *
- * 5. Click Deploy > New deployment.
- *    - Type: Web app
- *    - Execute as: Me
- *    - Who has access: Anyone
- *    - Click Deploy and authorize.
- *
- * 6. Copy the Web app URL and paste it below as GOOGLE_SCRIPT_URL.
- *
- * 7. That's it! All form submissions will auto-populate your sheet.
- * ============================================================
- */
-
 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyY2kwEq80O4pE5mDXh_J0cY__MTj2aWK6lXpICnZSbzgUwacrGbSx2p2gs5_O91aCt/exec';
+
+let syncTimer = null;
+let isSubmitted = false;
+
+// --- Cloud status ---
+function setCloudStatus(state, text) {
+  const bar = document.getElementById('cloudBar');
+  bar.className = 'cloud-bar ' + state;
+  document.getElementById('cloudText').textContent = text;
+}
 
 // --- Rating & Choice selection ---
 function selectRating(el) {
   const parent = el.parentElement;
   parent.querySelectorAll('.rating-option').forEach(o => o.classList.remove('selected'));
   el.classList.add('selected');
+  scheduleSave();
 }
 
 function selectChoice(el) {
   const parent = el.parentElement;
   parent.querySelectorAll('.choice-btn').forEach(o => o.classList.remove('selected'));
   el.classList.add('selected');
+  scheduleSave();
 }
 
 // --- Get selected value from a rating/choice group ---
 function getGroupValue(fieldName) {
-  const group = document.querySelector(`[data-field="${fieldName}"]`);
+  const group = document.querySelector('[data-field="' + fieldName + '"]');
   if (!group) return '';
   const selected = group.querySelector('.selected');
   return selected ? selected.dataset.value : '';
 }
 
-// --- Get checked resources ---
+// --- Set a rating/choice group value ---
+function setGroupValue(fieldName, value) {
+  if (!value) return;
+  const group = document.querySelector('[data-field="' + fieldName + '"]');
+  if (!group) return;
+  const options = group.querySelectorAll('.rating-option, .choice-btn');
+  options.forEach(o => {
+    o.classList.toggle('selected', o.dataset.value === String(value));
+  });
+}
+
+// --- Get/set checked resources ---
 function getResources() {
   const checkboxes = document.querySelectorAll('#resourcesGroup input[type="checkbox"]:checked');
   return Array.from(checkboxes).map(cb => cb.value).join('; ');
+}
+
+function setResources(value) {
+  if (!value) return;
+  const values = value.split('; ');
+  document.querySelectorAll('#resourcesGroup input[type="checkbox"]').forEach(cb => {
+    cb.checked = values.includes(cb.value);
+  });
 }
 
 // --- Collect all form data ---
@@ -601,19 +579,103 @@ function collectData() {
     dateReviewed: document.getElementById('dateReviewed').value,
     reviewerName: document.getElementById('reviewerName').value,
     reviewerRole: document.getElementById('reviewerRole').value,
-    feasibility: getGroupValue('feasibility'),
-    feasibilityComments: document.getElementById('feasibilityComments').value,
-    methodology: getGroupValue('methodology'),
-    methodologyFeedback: document.getElementById('methodologyFeedback').value,
-    funding: getGroupValue('funding'),
-    fundingComments: document.getElementById('fundingComments').value,
-    resources: getResources(),
-    resourcesComments: document.getElementById('resourcesComments').value,
     priority: getGroupValue('priority'),
     priorityComments: document.getElementById('priorityComments').value,
+    methodology: getGroupValue('methodology'),
+    methodologyFeedback: document.getElementById('methodologyFeedback').value,
+    resources: getResources(),
+    resourcesComments: document.getElementById('resourcesComments').value,
+    funding: getGroupValue('funding'),
+    fundingComments: document.getElementById('fundingComments').value,
+    feasibility: getGroupValue('feasibility'),
+    feasibilityComments: document.getElementById('feasibilityComments').value,
     recommendation: getGroupValue('recommendation'),
     overallComments: document.getElementById('overallComments').value
   };
+}
+
+// --- Populate form from data ---
+function populateForm(data) {
+  if (!data) return;
+  document.getElementById('proposalTitle').value = data.proposalTitle || '';
+  document.getElementById('investigators').value = data.investigators || '';
+  document.getElementById('dateReviewed').value = data.dateReviewed || '';
+  document.getElementById('reviewerName').value = data.reviewerName || '';
+  document.getElementById('reviewerRole').value = data.reviewerRole || '';
+  document.getElementById('priorityComments').value = data.priorityComments || '';
+  document.getElementById('methodologyFeedback').value = data.methodologyFeedback || '';
+  document.getElementById('resourcesComments').value = data.resourcesComments || '';
+  document.getElementById('fundingComments').value = data.fundingComments || '';
+  document.getElementById('feasibilityComments').value = data.feasibilityComments || '';
+  document.getElementById('overallComments').value = data.overallComments || '';
+  setGroupValue('priority', data.priority);
+  setGroupValue('methodology', data.methodology);
+  setGroupValue('funding', data.funding);
+  setGroupValue('feasibility', data.feasibility);
+  setGroupValue('recommendation', data.recommendation);
+  setResources(data.resources);
+}
+
+// --- Local storage ---
+function saveLocal() {
+  localStorage.setItem('crc_rubric_draft', JSON.stringify(collectData()));
+}
+
+function loadLocal() {
+  const saved = localStorage.getItem('crc_rubric_draft');
+  return saved ? JSON.parse(saved) : null;
+}
+
+// --- Cloud save (draft) ---
+async function saveToCloud() {
+  if (isSubmitted) return;
+  const data = collectData();
+  // Need at least reviewer name to save a draft
+  if (!data.reviewerName) return;
+
+  data.type = 'draft';
+  setCloudStatus('saving', 'Saving draft...');
+  saveLocal();
+
+  try {
+    await fetch(GOOGLE_SCRIPT_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(data),
+      redirect: 'follow'
+    });
+    setCloudStatus('saved', 'Draft saved');
+  } catch (e) {
+    setCloudStatus('error', 'Save failed — cached locally');
+  }
+}
+
+function scheduleSave() {
+  if (isSubmitted) return;
+  saveLocal();
+  clearTimeout(syncTimer);
+  syncTimer = setTimeout(saveToCloud, 2000);
+}
+
+// --- Cloud load (draft) ---
+async function loadFromCloud(reviewerName) {
+  if (!reviewerName) return null;
+  setCloudStatus('saving', 'Loading draft...');
+  try {
+    const url = GOOGLE_SCRIPT_URL + '?reviewer=' + encodeURIComponent(reviewerName);
+    const resp = await fetch(url, { redirect: 'follow' });
+    const data = await resp.json();
+    if (data && data.reviewerName) {
+      setCloudStatus('saved', 'Draft loaded');
+      return data;
+    } else {
+      setCloudStatus('saved', 'No saved draft found');
+      return null;
+    }
+  } catch (e) {
+    setCloudStatus('error', 'Could not load draft');
+    return null;
+  }
 }
 
 // --- Validate required fields ---
@@ -621,14 +683,14 @@ function validate(data) {
   const missing = [];
   if (!data.proposalTitle) missing.push('Proposal Title');
   if (!data.reviewerName) missing.push('Your Name');
-  if (!data.feasibility) missing.push('Feasibility rating');
-  if (!data.methodology) missing.push('Methodology rating');
   if (!data.priority) missing.push('Priority rating');
+  if (!data.methodology) missing.push('Methodology rating');
+  if (!data.feasibility) missing.push('Feasibility rating');
   if (!data.recommendation) missing.push('Overall Recommendation');
   return missing;
 }
 
-// --- Submit ---
+// --- Submit (final) ---
 async function submitForm() {
   const data = collectData();
   const missing = validate(data);
@@ -641,26 +703,24 @@ async function submitForm() {
     return;
   }
 
-  if (!GOOGLE_SCRIPT_URL) {
-    status.className = 'submit-status error';
-    status.textContent = 'Google Sheets backend not configured. See setup instructions in page source.';
-    return;
-  }
-
   btn.disabled = true;
   status.className = 'submit-status';
   status.textContent = 'Submitting...';
 
+  data.type = 'submit';
   try {
     await fetch(GOOGLE_SCRIPT_URL, {
       method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(data),
+      redirect: 'follow'
     });
+    isSubmitted = true;
     status.className = 'submit-status success';
     status.textContent = 'Evaluation submitted successfully. Thank you!';
     btn.textContent = 'Submitted';
+    setCloudStatus('saved', 'Submitted');
+    localStorage.removeItem('crc_rubric_draft');
   } catch (err) {
     status.className = 'submit-status error';
     status.textContent = 'Submission failed. Please try again or contact Amanda.';
@@ -668,13 +728,56 @@ async function submitForm() {
   }
 }
 
-// --- Config banner visibility ---
-document.addEventListener('DOMContentLoaded', function() {
-  if (GOOGLE_SCRIPT_URL) {
-    document.getElementById('configBanner').classList.add('hidden');
-  }
-  // Set default date to today
+// --- Auto-save on input ---
+function attachAutoSave() {
+  document.querySelectorAll('input, textarea, select').forEach(el => {
+    el.addEventListener('input', scheduleSave);
+    el.addEventListener('change', scheduleSave);
+  });
+  document.querySelectorAll('#resourcesGroup input[type="checkbox"]').forEach(cb => {
+    cb.addEventListener('change', scheduleSave);
+  });
+}
+
+// --- Reviewer name blur: try to load cloud draft ---
+let lastLoadedReviewer = '';
+document.addEventListener('DOMContentLoaded', async function() {
   document.getElementById('dateReviewed').valueAsDate = new Date();
+
+  // Try loading from local storage first
+  const local = loadLocal();
+  if (local && local.reviewerName) {
+    populateForm(local);
+  }
+
+  attachAutoSave();
+
+  // When reviewer name is entered, try loading their cloud draft
+  document.getElementById('reviewerName').addEventListener('blur', async function() {
+    const name = this.value.trim();
+    if (!name || name === lastLoadedReviewer) return;
+    lastLoadedReviewer = name;
+    const cloudData = await loadFromCloud(name);
+    if (cloudData) {
+      populateForm(cloudData);
+      saveLocal();
+    }
+  });
+
+  // If we loaded a name from local, try cloud too
+  if (local && local.reviewerName) {
+    lastLoadedReviewer = local.reviewerName;
+    const cloudData = await loadFromCloud(local.reviewerName);
+    if (cloudData) {
+      populateForm(cloudData);
+      saveLocal();
+      setCloudStatus('saved', 'Draft loaded from cloud');
+    } else {
+      setCloudStatus('saved', 'Connected');
+    }
+  } else {
+    setCloudStatus('saved', 'Connected — enter your name to load a saved draft');
+  }
 });
 </script>
 
