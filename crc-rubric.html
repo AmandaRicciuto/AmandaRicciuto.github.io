@@ -331,10 +331,27 @@
     </div>
     <div class="section-body">
       <p class="prompt">How would you rate the priority and clinical relevance of this proposal for the CIDsCaNN network?</p>
-      <div class="choice-group" data-field="priority">
-        <div class="choice-btn green" data-value="High" onclick="selectChoice(this)">High</div>
-        <div class="choice-btn amber" data-value="Intermediate" onclick="selectChoice(this)">Intermediate</div>
-        <div class="choice-btn red" data-value="Low" onclick="selectChoice(this)">Low</div>
+      <div class="rating-scale" data-field="priority">
+        <div class="rating-option" data-value="1" onclick="selectRating(this)">
+          <span class="rating-value">1</span>
+          <span class="rating-label">Very Low</span>
+        </div>
+        <div class="rating-option" data-value="2" onclick="selectRating(this)">
+          <span class="rating-value">2</span>
+          <span class="rating-label">Low</span>
+        </div>
+        <div class="rating-option" data-value="3" onclick="selectRating(this)">
+          <span class="rating-value">3</span>
+          <span class="rating-label">Moderate</span>
+        </div>
+        <div class="rating-option" data-value="4" onclick="selectRating(this)">
+          <span class="rating-value">4</span>
+          <span class="rating-label">High</span>
+        </div>
+        <div class="rating-option" data-value="5" onclick="selectRating(this)">
+          <span class="rating-value">5</span>
+          <span class="rating-label">Very High</span>
+        </div>
       </div>
       <div class="field">
         <label for="priorityComments">Comments on priority/relevance</label>
@@ -470,7 +487,6 @@
       <div class="choice-group" data-field="recommendation">
         <div class="choice-btn green" data-value="Accept" onclick="selectChoice(this)">Accept</div>
         <div class="choice-btn amber" data-value="Accept with revisions" onclick="selectChoice(this)">Accept with revisions</div>
-        <div class="choice-btn" data-value="Major revisions required" onclick="selectChoice(this)">Major revisions required</div>
         <div class="choice-btn red" data-value="Decline" onclick="selectChoice(this)">Decline</div>
       </div>
       <div class="field">
