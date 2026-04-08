@@ -14,8 +14,8 @@
       --text-light: #555;
       --bg: #fff;
       --border: #ccc;
-      --heading-font: "Times New Roman", Times, Georgia, serif;
-      --body-font: "Times New Roman", Times, Georgia, serif;
+      --heading-font: Arial, Helvetica, sans-serif;
+      --body-font: Arial, Helvetica, sans-serif;
     }
 
     html { font-size: 11pt; }
@@ -35,7 +35,22 @@
       body { padding: 0; margin: 0; }
       .no-print { display: none; }
       a { color: var(--text); text-decoration: none; }
-      @page { margin: 0.75in; size: letter; }
+      @page {
+        margin: 0.75in;
+        size: letter;
+        @top-right {
+          content: "RICCIUTO, Amanda";
+          font-family: Arial, Helvetica, sans-serif;
+          font-size: 9pt;
+          color: #555;
+        }
+        @bottom-center {
+          content: "Page " counter(page) " of " counter(pages);
+          font-family: Arial, Helvetica, sans-serif;
+          font-size: 9pt;
+          color: #555;
+        }
+      }
     }
 
     /* ── Screen readability ── */
@@ -141,6 +156,7 @@
       margin-top: 2pt;
       padding-left: 12pt;
       font-size: 10pt;
+      font-style: italic;
       color: #333;
     }
 
@@ -308,7 +324,7 @@
 </div>
 <div class="entry">
   <div class="entry-date">2017</div>
-  <div class="entry-content">Board Certification, Paediatric Gastroenterology, American Board of Paediatrics (ABP), US. License/Membership #: 1786</div>
+  <div class="entry-content">Board Certification, Paediatric Gastroenterology, American Board of Pediatrics (ABP), US. License/Membership #: 1786</div>
 </div>
 <div class="entry">
   <div class="entry-date">2016</div>
@@ -377,213 +393,213 @@
 <div class="h3-section">Distinctions and Research Awards</div>
 
 <div class="h4-section">International</div>
-<p class="bold small mb-4">Received</p>
+<p style="font-size:10pt; text-decoration:underline; margin-bottom:4pt;">Received</p>
 
 <div class="entry">
   <div class="entry-date">2021</div>
-  <div class="entry-content">Poster of Distinction, First Author, Digestive Disease Week (DDW), Virtual. (Research Award, Specialty: Gastroenterology)<div class="entry-desc">Awarded for outstanding poster at DDW annual meeting (Influence of IBD Activity on COVID-19 Outcomes).</div></div>
+  <div class="entry-content"><strong>Poster of Distinction</strong>, First Author, Digestive Disease Week (DDW), Virtual. (Research Award, Specialty: Gastroenterology)<div class="entry-desc">Awarded for outstanding poster at DDW annual meeting (Influence of IBD Activity on COVID-19 Outcomes).</div></div>
 </div>
 <div class="entry">
   <div class="entry-date">2020</div>
-  <div class="entry-content">NASPGHAN Young Faculty Clinical Investigator Research Award, North American Society for Pediatric Gastroenterology Hepatology and Nutrition (NASPGHAN), Virtual. (Research Award, Specialty: Pediatric Gastroenterology)<div class="entry-desc">Awarded for best research abstract submitted to NASPGHAN annual meeting by a junior faculty (Serum protein biomarkers to predict infliximab response in pediatric colitis). Total Amount: 1,000 USD</div></div>
+  <div class="entry-content"><strong>NASPGHAN Young Faculty Clinical Investigator Research Award</strong>, North American Society for Pediatric Gastroenterology Hepatology and Nutrition (NASPGHAN), Virtual. (Research Award, Specialty: Paediatric Gastroenterology)<div class="entry-desc">Awarded for best research abstract submitted to NASPGHAN annual meeting by a junior faculty (Serum protein biomarkers to predict infliximab response in paediatric colitis). Total Amount: 1,000 USD</div></div>
 </div>
 <div class="entry">
   <div class="entry-date">2019</div>
-  <div class="entry-content">NASPGHAN Young Faculty Clinical Investigator Research Award, NASPGHAN, Chicago, IL, US. (Research Award, Specialty: Pediatric Gastroenterology)<div class="entry-desc">Awarded for best research abstract submitted to NASPGHAN annual meeting by a junior faculty (Validation of Endoscopic Scoring Tools in Pediatric UC). Total Amount: 1,000 USD</div></div>
+  <div class="entry-content"><strong>NASPGHAN Young Faculty Clinical Investigator Research Award</strong>, NASPGHAN, Chicago, IL, US. (Research Award, Specialty: Paediatric Gastroenterology)<div class="entry-desc">Awarded for best research abstract submitted to NASPGHAN annual meeting by a junior faculty (Validation of Endoscopic Scoring Tools in Paediatric UC). Total Amount: 1,000 USD</div></div>
 </div>
 <div class="entry">
   <div class="entry-date">2019</div>
-  <div class="entry-content">Gerard Odell Award for Excellence in Liver Disease Research, NASPGHAN, Chicago, IL, US. (Research Award, Specialty: Pediatric Gastroenterology)<div class="entry-desc">Awarded for best liver disease research abstract submitted to NASPGHAN annual meeting (Validation of MRCP prognostic index in pediatric PSC).</div></div>
+  <div class="entry-content"><strong>Gerard Odell Award for Excellence in Liver Disease Research</strong>, NASPGHAN, Chicago, IL, US. (Research Award, Specialty: Paediatric Gastroenterology)<div class="entry-desc">Awarded for best liver disease research abstract submitted to NASPGHAN annual meeting (Validation of MRCP prognostic index in paediatric PSC).</div></div>
 </div>
 <div class="entry">
   <div class="entry-date">2019</div>
-  <div class="entry-content">Student Abstract of the Year Award, American Gastroenterological Association (AGA), San Diego, CA, US. (Research Award, Specialty: Gastroenterology)<div class="entry-desc">Awarded for best student abstract submitted to DDW annual meeting (Longitudinal data analysis to delineate pediatric PSC-IBD phenotype). Total Amount: 1,000 USD</div></div>
+  <div class="entry-content"><strong>Student Abstract of the Year Award</strong>, American Gastroenterological Association (AGA), San Diego, CA, US. (Research Award, Specialty: Gastroenterology)<div class="entry-desc">Awarded for best student abstract submitted to DDW annual meeting (Longitudinal data analysis to delineate paediatric PSC-IBD phenotype). Total Amount: 1,000 USD</div></div>
 </div>
 <div class="entry">
   <div class="entry-date">2019</div>
-  <div class="entry-content">Early Career Investigator Award, AGA, Chicago, IL, US. (Research Award, Specialty: Gastroenterology)<div class="entry-desc">Awarded for outstanding trainee abstract submitted to DDW annual meeting (Longitudinal data analysis to delineate pediatric PSC-IBD phenotype).</div></div>
+  <div class="entry-content"><strong>Early Career Investigator Award</strong>, AGA, Chicago, IL, US. (Research Award, Specialty: Gastroenterology)<div class="entry-desc">Awarded for outstanding trainee abstract submitted to DDW annual meeting (Longitudinal data analysis to delineate paediatric PSC-IBD phenotype).</div></div>
 </div>
 <div class="entry">
   <div class="entry-date">2019</div>
-  <div class="entry-content">ESPGHAN Young Investigator Award, European Society for Paediatric Gastroenterology Hepatology and Nutrition (ESPGHAN), Glasgow, Scotland. (Travel Award, Specialty: Paediatric Gastroenterology)<div class="entry-desc">Trainee travel award for outstanding abstract submitted to ESPGHAN annual meeting. Total Amount: 500 €</div></div>
+  <div class="entry-content"><strong>ESPGHAN Young Investigator Award</strong>, European Society for Paediatric Gastroenterology Hepatology and Nutrition (ESPGHAN), Glasgow, Scotland. (Travel Award, Specialty: Paediatric Gastroenterology)<div class="entry-desc">Trainee travel award for outstanding abstract submitted to ESPGHAN annual meeting. Total Amount: 500 €</div></div>
 </div>
 <div class="entry">
   <div class="entry-date">2018</div>
-  <div class="entry-content">Fellow to Faculty Transition Award in IBD, NASPGHAN Foundation, US. (Salary Support, Specialty: Pediatric IBD)<div class="entry-desc">Awarded to a promising senior pediatric gastroenterology fellow to enable an additional year engaged in full-time research and patient care related to pediatric IBD. Total Amount: 75,000 USD</div></div>
+  <div class="entry-content"><strong>Fellow to Faculty Transition Award in IBD</strong>, NASPGHAN Foundation, US. (Salary Support, Specialty: Paediatric IBD)<div class="entry-desc">Awarded to a promising senior paediatric gastroenterology fellow to enable an additional year engaged in full-time research and patient care related to paediatric IBD. Total Amount: 75,000 USD</div></div>
 </div>
 <div class="entry">
   <div class="entry-date">2017</div>
-  <div class="entry-content">Fellow Research Award, NASPGHAN, Las Vegas, NV, US. (Research Award, Specialty: Pediatric Gastroenterology)<div class="entry-desc">Awarded for best fellow research abstract submitted to NASPGHAN annual meeting (Symptoms underestimate endoscopic activity in PSC-IBD). Total Amount: 500 USD</div></div>
+  <div class="entry-content"><strong>Fellow Research Award</strong>, NASPGHAN, Las Vegas, NV, US. (Research Award, Specialty: Paediatric Gastroenterology)<div class="entry-desc">Awarded for best fellow research abstract submitted to NASPGHAN annual meeting (Symptoms underestimate endoscopic activity in PSC-IBD). Total Amount: 500 USD</div></div>
 </div>
 <div class="entry">
   <div class="entry-date">2017</div>
-  <div class="entry-content">ESPGHAN Abstract Award, ESPGHAN, Prague, Czech Republic. (Research Award, Specialty: Paediatric Gastroenterology)<div class="entry-desc">Amongst top 8 abstracts submitted to ESPGHAN annual meeting, presented during main plenary (Comparison of PSC and PSC-IBD using data from Pediatric PSC Consortium).</div></div>
+  <div class="entry-content"><strong>ESPGHAN Abstract Award</strong>, ESPGHAN, Prague, Czech Republic. (Research Award, Specialty: Paediatric Gastroenterology)<div class="entry-desc">Amongst top 8 abstracts submitted to ESPGHAN annual meeting, presented during main plenary (Comparison of PSC and PSC-IBD using data from Pediatric PSC Consortium).</div></div>
 </div>
 <div class="entry">
   <div class="entry-date">2017</div>
-  <div class="entry-content">ESPGHAN Young Investigator Award, ESPGHAN, Prague, Czech Republic. (Travel Award, Specialty: Paediatric Gastroenterology)<div class="entry-desc">Trainee travel award for outstanding abstract submitted to ESPGHAN annual meeting. Total Amount: 1,000 €</div></div>
+  <div class="entry-content"><strong>ESPGHAN Young Investigator Award</strong>, ESPGHAN, Prague, Czech Republic. (Travel Award, Specialty: Paediatric Gastroenterology)<div class="entry-desc">Trainee travel award for outstanding abstract submitted to ESPGHAN annual meeting. Total Amount: 1,000 €</div></div>
 </div>
 <div class="entry">
   <div class="entry-date">2017</div>
-  <div class="entry-content">Early Career Gastroenterology Award, AGA, Chicago, IL, US. (Research Award, Specialty: Gastroenterology)<div class="entry-desc">Awarded for outstanding trainee abstract submitted to DDW annual meeting (Symptoms underestimate endoscopic inflammation in pediatric PSC-IBD).</div></div>
+  <div class="entry-content"><strong>Early Career Gastroenterology Award</strong>, AGA, Chicago, IL, US. (Research Award, Specialty: Gastroenterology)<div class="entry-desc">Awarded for outstanding trainee abstract submitted to DDW annual meeting (Symptoms underestimate endoscopic inflammation in paediatric PSC-IBD).</div></div>
 </div>
 <div class="entry">
   <div class="entry-date">2017</div>
-  <div class="entry-content">Fellow Travel Award, American Association for the Study of Liver Diseases (AASLD), Chicago, IL, US. (Travel Award, Specialty: Hepatology)<div class="entry-desc">Awarded to support travel to present outstanding hepatology abstract submitted to DDW annual meeting (Comparison of PSC and PSC-IBD using data from Pediatric PSC Consortium). Total Amount: 1,000 USD</div></div>
+  <div class="entry-content"><strong>Fellow Travel Award</strong>, American Association for the Study of Liver Diseases (AASLD), Chicago, IL, US. (Travel Award, Specialty: Hepatology)<div class="entry-desc">Awarded to support travel to present outstanding hepatology abstract submitted to DDW annual meeting (Comparison of PSC and PSC-IBD using data from Pediatric PSC Consortium). Total Amount: 1,000 USD</div></div>
 </div>
 <div class="entry">
   <div class="entry-date">2016</div>
-  <div class="entry-content">Poster of Distinction, NASPGHAN, Montreal, QC, Canada. (Research Award, Specialty: Pediatric Gastroenterology)<div class="entry-desc">Awarded for outstanding poster presented at World Congress of Pediatric Gastroenterology Hepatology and Nutrition (Autoimmune liver disease associated with anti-TNF use in pediatric IBD).</div></div>
+  <div class="entry-content"><strong>Poster of Distinction</strong>, NASPGHAN, Montreal, QC, Canada. (Research Award, Specialty: Paediatric Gastroenterology)<div class="entry-desc">Awarded for outstanding poster presented at World Congress of Pediatric Gastroenterology Hepatology and Nutrition (Autoimmune liver disease associated with anti-TNF use in paediatric IBD).</div></div>
 </div>
 
 <div class="h4-section">National</div>
-<p class="bold small mb-4">Received</p>
+<p style="font-size:10pt; text-decoration:underline; margin-bottom:4pt;">Received</p>
 
 <div class="entry">
   <div class="entry-date">Nov 2021</div>
-  <div class="entry-content">Crohn's and Colitis Canada Rising Star Award, Crohn's and Colitis Canada (CCC). (Distinction, Specialty: IBD)</div>
+  <div class="entry-content"><strong>Crohn's and Colitis Canada Rising Star Award</strong>, Crohn's and Colitis Canada (CCC). (Distinction, Specialty: IBD)</div>
 </div>
 <div class="entry">
   <div class="entry-date">Nov 2021</div>
-  <div class="entry-content">Crohn's and Colitis Canada's Women in IBD Emerging Researcher Award, CCC. (Research Award, Specialty: IBD)<div class="entry-desc">Total Amount: 15,000 CAD</div></div>
+  <div class="entry-content"><strong>Crohn's and Colitis Canada's Women in IBD Emerging Researcher Award</strong>, CCC. (Research Award, Specialty: IBD)<div class="entry-desc">Total Amount: 15,000 CAD</div></div>
 </div>
 <div class="entry">
   <div class="entry-date">Nov 2019</div>
-  <div class="entry-content">Junior Investigator in IBD Award, Canada Future Directions in IBD, Toronto, ON, Canada. (Research Award, Specialty: IBD)<div class="entry-desc">Awarded for best research abstract submitted to Meeting of the Minds by a junior faculty (Validation of endoscopic scoring indices in pediatric ulcerative colitis).</div></div>
+  <div class="entry-content"><strong>Junior Investigator in IBD Award</strong>, Canada Future Directions in IBD, Toronto, ON, Canada. (Research Award, Specialty: IBD)<div class="entry-desc">Awarded for best research abstract submitted to Meeting of the Minds by a junior faculty (Validation of endoscopic scoring indices in paediatric ulcerative colitis).</div></div>
 </div>
 <div class="entry">
   <div class="entry-date">2019</div>
-  <div class="entry-content">Future Leaders in IBD (FLIBD) Membership, FLIBD, Canada. (Distinction, Specialty: IBD)<div class="entry-desc">Selected to be an academic track member of the FLIBD program, which supports emerging investigators and future leaders in IBD in Canada.</div></div>
+  <div class="entry-content"><strong>Future Leaders in IBD (FLIBD) Membership</strong>, FLIBD, Canada. (Distinction, Specialty: IBD)<div class="entry-desc">Selected to be an academic track member of the FLIBD program, which supports emerging investigators and future leaders in IBD in Canada.</div></div>
 </div>
 <div class="entry">
   <div class="entry-date">2017</div>
-  <div class="entry-content">Poster of Distinction, Clinical Investigator Trainee Association of Canada (CITAC), Toronto, ON, Canada. (Research Award, Specialty: Paediatric Gastroenterology)</div>
+  <div class="entry-content"><strong>Poster of Distinction</strong>, Clinical Investigator Trainee Association of Canada (CITAC), Toronto, ON, Canada. (Research Award, Specialty: Paediatric Gastroenterology)</div>
 </div>
 <div class="entry">
   <div class="entry-date">2016–2017</div>
-  <div class="entry-content">Canada Graduate Scholarship – Master's, University of Toronto, Toronto, ON, Canada. (Scholarship, Specialty: Clinical Epidemiology)<div class="entry-desc">Total Amount: 17,500 CAD</div></div>
+  <div class="entry-content"><strong>Canada Graduate Scholarship – Master's</strong>, University of Toronto, Toronto, ON, Canada. (Scholarship, Specialty: Clinical Epidemiology)<div class="entry-desc">Total Amount: 17,500 CAD</div></div>
 </div>
 <div class="entry">
   <div class="entry-date">2016</div>
-  <div class="entry-content">Young Investigator Travel Grant, Canadian Association of Gastroenterology (CAG), Montreal, QC, Canada. (Travel Award, Specialty: Gastroenterology)<div class="entry-desc">Total Amount: 1,000 CAD</div></div>
+  <div class="entry-content"><strong>Young Investigator Travel Grant</strong>, Canadian Association of Gastroenterology (CAG), Montreal, QC, Canada. (Travel Award, Specialty: Gastroenterology)<div class="entry-desc">Total Amount: 1,000 CAD</div></div>
 </div>
 <div class="entry">
   <div class="entry-date">2016</div>
-  <div class="entry-content">Poster of Distinction, Gastroenterology Residents In-Training (GRIT) course, Montreal, QC, Canada. (Research Award, Specialty: Gastroenterology)<div class="entry-desc">Awarded for best poster presentation.</div></div>
+  <div class="entry-content"><strong>Poster of Distinction</strong>, Gastroenterology Residents In-Training (GRIT) course, Montreal, QC, Canada. (Research Award, Specialty: Gastroenterology)<div class="entry-desc">Awarded for best poster presentation.</div></div>
 </div>
 <div class="entry">
   <div class="entry-date">2015</div>
-  <div class="entry-content">Resident Research Award, Canadian Association of Gastroenterology (CAG). (Research Award, Specialty: Gastroenterology)<div class="entry-desc">Awarded to an outstanding Canadian gastroenterology trainee to support research. Total Amount: 5,000 CAD</div></div>
+  <div class="entry-content"><strong>Resident Research Award</strong>, Canadian Association of Gastroenterology (CAG). (Research Award, Specialty: Gastroenterology)<div class="entry-desc">Awarded to an outstanding Canadian gastroenterology trainee to support research. Total Amount: 5,000 CAD</div></div>
 </div>
 
 <div class="h4-section">Local</div>
-<p class="bold small mb-4">Received</p>
+<p style="font-size:10pt; text-decoration:underline; margin-bottom:4pt;">Received</p>
 
 <div class="entry">
   <div class="entry-date">2019</div>
-  <div class="entry-content">Selected to attend Eureka Institute for Translational Medicine International Certificate Course. (Distinction, Specialty: Research)<div class="entry-desc">Selected by Department of Paediatrics to attend this international course (cancelled due to COVID-19 pandemic).</div></div>
+  <div class="entry-content"><strong>Selected to attend Eureka Institute for Translational Medicine International Certificate Course. (Distinction</strong>, Specialty: Research)<div class="entry-desc">Selected by Department of Paediatrics to attend this international course (cancelled due to COVID-19 pandemic).</div></div>
 </div>
 <div class="entry">
   <div class="entry-date">2019</div>
-  <div class="entry-content">Sass-Kortsak Award, SickKids Research Institute, Toronto, ON, Canada. (Research Award, Specialty: Translational Research)<div class="entry-desc">Awarded annually by the SickKids RI to 2 doctoral or post-doctoral trainees for excellence in translational research. Total Amount: 2,500 CAD</div></div>
+  <div class="entry-content"><strong>Sass-Kortsak Award</strong>, SickKids Research Institute, Toronto, ON, Canada. (Research Award, Specialty: Translational Research)<div class="entry-desc">Awarded annually by the SickKids RI to 2 doctoral or post-doctoral trainees for excellence in translational research. Total Amount: 2,500 CAD</div></div>
 </div>
 <div class="entry">
   <div class="entry-date">2019</div>
-  <div class="entry-content">Beverly Antle Trainee Award, Child Health Evaluative Sciences (CHES), SickKids Research Institute, Toronto, ON, Canada. (Distinction, Specialty: Clinical Research)<div class="entry-desc">Awarded for first-author research demonstrating excellence in clinical research and knowledge translation. Total Amount: 1,000 CAD</div></div>
+  <div class="entry-content"><strong>Beverly Antle Trainee Award</strong>, Child Health Evaluative Sciences (CHES), SickKids Research Institute, Toronto, ON, Canada. (Distinction, Specialty: Clinical Research)<div class="entry-desc">Awarded for first-author research demonstrating excellence in clinical research and knowledge translation. Total Amount: 1,000 CAD</div></div>
 </div>
 <div class="entry">
   <div class="entry-date">2017</div>
-  <div class="entry-content">Child Health Evaluative Sciences (CHES) Exceptional Trainee Award, SickKids Research Institute, Toronto, ON, Canada. (Distinction, Specialty: Paediatric Gastroenterology)<div class="entry-desc">Awarded for exceptional contributions to the RI and one's field as a trainee.</div></div>
+  <div class="entry-content"><strong>Child Health Evaluative Sciences (CHES) Exceptional Trainee Award</strong>, SickKids Research Institute, Toronto, ON, Canada. (Distinction, Specialty: Paediatric Gastroenterology)<div class="entry-desc">Awarded for exceptional contributions to the RI and one's field as a trainee.</div></div>
 </div>
 <div class="entry">
   <div class="entry-date">2016</div>
-  <div class="entry-content">Dick Hamilton Award, Division of Gastroenterology Hepatology and Nutrition, The Hospital for Sick Children, Toronto, ON, Canada. (Distinction, Specialty: Paediatric Gastroenterology)<div class="entry-desc">Awarded to the fellow in the GI training program who has demonstrated most excellence in research, clinical care and education.</div></div>
+  <div class="entry-content"><strong>Dick Hamilton Award</strong>, Division of Gastroenterology Hepatology and Nutrition, The Hospital for Sick Children, Toronto, ON, Canada. (Distinction, Specialty: Paediatric Gastroenterology)<div class="entry-desc">Awarded to the fellow in the GI training program who has demonstrated most excellence in research, clinical care and education.</div></div>
 </div>
 <div class="entry">
   <div class="entry-date">2016</div>
-  <div class="entry-content">Trainee Travel Award, SickKids Research Institute, Toronto, ON, Canada. (Travel Award, Specialty: Paediatric Gastroenterology)<div class="entry-desc">Total Amount: 1,000 CAD</div></div>
+  <div class="entry-content"><strong>Trainee Travel Award</strong>, SickKids Research Institute, Toronto, ON, Canada. (Travel Award, Specialty: Paediatric Gastroenterology)<div class="entry-desc">Total Amount: 1,000 CAD</div></div>
 </div>
 <div class="entry">
   <div class="entry-date">2016</div>
-  <div class="entry-content">Poster of Distinction, Joint Adult-Paediatric GI Research Day, University of Toronto, Toronto, ON, Canada. (Research Award, Specialty: Gastroenterology)<div class="entry-desc">Awarded for outstanding poster presentation (Autoimmune liver disease associated with anti-TNF use in pediatric IBD).</div></div>
+  <div class="entry-content"><strong>Poster of Distinction</strong>, Joint Adult-Paediatric GI Research Day, University of Toronto, Toronto, ON, Canada. (Research Award, Specialty: Gastroenterology)<div class="entry-desc">Awarded for outstanding poster presentation (Autoimmune liver disease associated with anti-TNF use in paediatric IBD).</div></div>
 </div>
 <div class="entry">
   <div class="entry-date">2016</div>
-  <div class="entry-content">Conference Grant, School of Graduate Studies, University of Toronto, Toronto, ON, Canada. (Travel Award, Specialty: Paediatric Gastroenterology)<div class="entry-desc">Total Amount: 830 CAD</div></div>
+  <div class="entry-content"><strong>Conference Grant</strong>, School of Graduate Studies, University of Toronto, Toronto, ON, Canada. (Travel Award, Specialty: Paediatric Gastroenterology)<div class="entry-desc">Total Amount: 830 CAD</div></div>
 </div>
 <div class="entry">
   <div class="entry-date">2011</div>
-  <div class="entry-content">Holmes Gold Medal, McGill University, Montreal, QC, Canada. (Distinction, Specialty: Medicine)<div class="entry-desc">Awarded to the student graduating from the McGill Medicine program with the highest overall standing.</div></div>
+  <div class="entry-content"><strong>Holmes Gold Medal</strong>, McGill University, Montreal, QC, Canada. (Distinction, Specialty: Medicine)<div class="entry-desc">Awarded to the student graduating from the McGill Medicine program with the highest overall standing.</div></div>
 </div>
 <div class="entry">
   <div class="entry-date">2006–2009</div>
-  <div class="entry-content">Greville Smith Undergraduate Scholarship, McGill University, Montreal, QC, Canada. (Scholarship, Specialty: Medicine)<div class="entry-desc">Awarded for academic excellence and potential for leadership. Total Amount: 40,000 CAD</div></div>
+  <div class="entry-content"><strong>Greville Smith Undergraduate Scholarship</strong>, McGill University, Montreal, QC, Canada. (Scholarship, Specialty: Medicine)<div class="entry-desc">Awarded for academic excellence and potential for leadership. Total Amount: 40,000 CAD</div></div>
 </div>
 
 <div class="h3-section">Teaching Awards</div>
 <div class="h4-section">Local</div>
-<p class="bold small mb-4">Received</p>
+<p style="font-size:10pt; text-decoration:underline; margin-bottom:4pt;">Received</p>
 
 <div class="entry">
   <div class="entry-date">2021</div>
-  <div class="entry-content">Fellowship Teaching Award, Division of Gastroenterology, Hepatology and Nutrition, The Hospital for Sick Children, Toronto, ON, Canada. (Paediatric Gastroenterology Fellows)<div class="entry-desc">Awarded annually by SickKids GI Fellows to Staff Physician who has most distinguished him/herself in teaching and mentorship.</div></div>
+  <div class="entry-content"><strong>Fellowship Teaching Award</strong>, Division of Gastroenterology, Hepatology and Nutrition, The Hospital for Sick Children, Toronto, ON, Canada. (Paediatric Gastroenterology Fellows)<div class="entry-desc">Awarded annually by SickKids GI Fellows to Staff Physician who has most distinguished him/herself in teaching and mentorship.</div></div>
 </div>
 
 <div class="h3-section">Student/Trainee Awards</div>
 <div class="h4-section">International</div>
-<p class="bold small mb-4">Received</p>
+<p style="font-size:10pt; text-decoration:underline; margin-bottom:4pt;">Received</p>
 
 <div class="entry">
   <div class="entry-date">Apr 2023</div>
-  <div class="entry-content">NASPGHAN Foundation Mentored Summer Student Research Program, Supervisor, Awardee Name: Claudia Tersigni. NASPGHAN.</div>
+  <div class="entry-content"><strong>NASPGHAN Foundation Mentored Summer Student Research Program</strong>, Supervisor, Awardee Name: Claudia Tersigni. NASPGHAN.</div>
 </div>
 <div class="entry">
   <div class="entry-date">Apr 2023</div>
-  <div class="entry-content">NASPGHAN Foundation Mentored Summer Student Research Program, Supervisor, Awardee Name: Sophie Zarb. NASPGHAN.</div>
+  <div class="entry-content"><strong>NASPGHAN Foundation Mentored Summer Student Research Program</strong>, Supervisor, Awardee Name: Sophie Zarb. NASPGHAN.</div>
 </div>
 <div class="entry">
   <div class="entry-date">Sep 2022</div>
-  <div class="entry-content">Abstract 1st Prize, Supervisor/Senior Author, Awardee Name: Rebecca Little. 6th International Symposium of Paediatric IBD (PIBD), Edinburgh, Scotland.<div class="entry-desc">Selected as best abstract presented at 6th PIBD Symposium (Long-term outcomes in paediatric-onset PSC-IBD; oral presentation).</div></div>
+  <div class="entry-content"><strong>Abstract 1st Prize</strong>, Supervisor/Senior Author, Awardee Name: Rebecca Little. 6th International Symposium of Paediatric IBD (PIBD), Edinburgh, Scotland.<div class="entry-desc">Selected as best abstract presented at 6th PIBD Symposium (Long-term outcomes in paediatric-onset PSC-IBD; oral presentation).</div></div>
 </div>
 <div class="entry">
   <div class="entry-date">Apr 2022</div>
-  <div class="entry-content">BSPGHAN Best Poster Prize, Supervisor/Senior Author, Awardee Name: Rebecca Little. British Society of Paediatric Gastroenterology Hepatology and Nutrition, Birmingham, UK.<div class="entry-desc">Best poster presented at BSPGHAN annual meeting (Defining the unique histology of paediatric PSC-IBD).</div></div>
+  <div class="entry-content"><strong>BSPGHAN Best Poster Prize</strong>, Supervisor/Senior Author, Awardee Name: Rebecca Little. British Society of Paediatric Gastroenterology Hepatology and Nutrition, Birmingham, UK.<div class="entry-desc">Best poster presented at BSPGHAN annual meeting (Defining the unique histology of paediatric PSC-IBD).</div></div>
 </div>
 
 <div class="h4-section">National</div>
-<p class="bold small mb-4">Received</p>
+<p style="font-size:10pt; text-decoration:underline; margin-bottom:4pt;">Received</p>
 
 <div class="entry">
   <div class="entry-date">Dec 2022–2025</div>
-  <div class="entry-content">TRIANGLE Amplify Award for Clinical Research Fellow, Co-Supervisor* (with Eric Benchimol), Awardee Name: Rabia Khan. TRIANGLE, Canada. (*denotes equal contribution)<div class="entry-desc">3-year program including salary support, mentorship and education. Topic: Ascertaining Population-Based Long-Term Outcomes in PSC-IBD. Total Amount: 50,150 CAD</div></div>
+  <div class="entry-content"><strong>TRIANGLE Amplify Award for Clinical Research Fellow</strong>, Co-Supervisor* (with Eric Benchimol), Awardee Name: Rabia Khan. TRIANGLE, Canada. (*denotes equal contribution)<div class="entry-desc">3-year program including salary support, mentorship and education. Topic: Ascertaining Population-Based Long-Term Outcomes in PSC-IBD. Total Amount: 50,150 CAD</div></div>
 </div>
 <div class="entry">
   <div class="entry-date">Jul 2022–Jun 2023</div>
-  <div class="entry-content">CAG Resident Research Award, Co-Supervisor* (with Aleixo Muise), Awardee Name: Lorraine Stallard. Canadian Association of Gastroenterology. (*denotes equal contribution)<div class="entry-desc">Awarded to support Canadian GI research trainee. Total Amount: 5,000 CAD</div></div>
+  <div class="entry-content"><strong>CAG Resident Research Award</strong>, Co-Supervisor* (with Aleixo Muise), Awardee Name: Lorraine Stallard. Canadian Association of Gastroenterology. (*denotes equal contribution)<div class="entry-desc">Awarded to support Canadian GI research trainee. Total Amount: 5,000 CAD</div></div>
 </div>
 
 <div class="h4-section">Local</div>
-<p class="bold small mb-4">Received</p>
+<p style="font-size:10pt; text-decoration:underline; margin-bottom:4pt;">Received</p>
 
 <div class="entry">
   <div class="entry-date">May 2023–Apr 2025</div>
-  <div class="entry-content">Clinician-Scientist Training Program (CSTP) Fellowship, Co-Supervisor* (with Eric Benchimol), Awardee Name: Rabia Khan. SickKids Research Institute, Toronto, ON, Canada. (*denotes equal contribution)<div class="entry-desc">Fellowship funding program for exceptional clinician-researchers. Topic: Ascertaining Population-Based Long-Term Outcomes in PSC-IBD. Total Amount: 100,000 CAD</div></div>
+  <div class="entry-content"><strong>Clinician-Scientist Training Program (CSTP) Fellowship</strong>, Co-Supervisor* (with Eric Benchimol), Awardee Name: Rabia Khan. SickKids Research Institute, Toronto, ON, Canada. (*denotes equal contribution)<div class="entry-desc">Fellowship funding program for exceptional clinician-researchers. Topic: Ascertaining Population-Based Long-Term Outcomes in PSC-IBD. Total Amount: 100,000 CAD</div></div>
 </div>
 <div class="entry">
   <div class="entry-date">Jun 2022</div>
-  <div class="entry-content">Dick Hamilton Award, Primary Supervisor, Awardee Name: Rebecca Little. Division of Gastroenterology Hepatology and Nutrition, SickKids, Toronto, ON, Canada.<div class="entry-desc">Awarded to the SickKids GI Fellow who has most distinguished themselves in research, clinical care and education.</div></div>
+  <div class="entry-content"><strong>Dick Hamilton Award</strong>, Primary Supervisor, Awardee Name: Rebecca Little. Division of Gastroenterology Hepatology and Nutrition, SickKids, Toronto, ON, Canada.<div class="entry-desc">Awarded to the SickKids GI Fellow who has most distinguished themselves in research, clinical care and education.</div></div>
 </div>
 <div class="entry">
   <div class="entry-date">May 2022</div>
-  <div class="entry-content">Beverly Antle Trainee Award, Thesis Committee Member/Co-Supervisor, Awardee Name: Rilla Schneider. CHES, SickKids Research Institute, Toronto, ON, Canada.<div class="entry-desc">Total Amount: 1,000 CAD</div></div>
+  <div class="entry-content"><strong>Beverly Antle Trainee Award</strong>, Thesis Committee Member/Co-Supervisor, Awardee Name: Rilla Schneider. CHES, SickKids Research Institute, Toronto, ON, Canada.<div class="entry-desc">Total Amount: 1,000 CAD</div></div>
 </div>
 <div class="entry">
   <div class="entry-date">May 2022</div>
-  <div class="entry-content">Oral Presentation Award, SickKids GI Research Day, Thesis Committee Member/Co-Supervisor, Awardee Name: Rilla Schneider.</div>
+  <div class="entry-content"><strong>Oral Presentation Award</strong>, SickKids GI Research Day, Thesis Committee Member/Co-Supervisor, Awardee Name: Rilla Schneider.</div>
 </div>
 <div class="entry">
   <div class="entry-date">Sep 2021</div>
-  <div class="entry-content">Poster Award, CSCI-CITAC, Thesis Committee Member/Co-Supervisor, Awardee Name: Rilla Schneider.</div>
+  <div class="entry-content"><strong>Poster Award</strong>, CSCI-CITAC, Thesis Committee Member/Co-Supervisor, Awardee Name: Rilla Schneider.</div>
 </div>
 
 <!-- ============================================================ -->
@@ -609,6 +625,8 @@
 <div class="entry"><div class="entry-date">2020–2021</div><div class="entry-content">Physician Representative, PRO-KIIDS Committee, Crohn's and Colitis Foundation</div></div>
 
 <div class="h4-section">National</div>
+<div class="entry"><div class="entry-date">2026–Present</div><div class="entry-content">Co-Chair, Clinical Research Committee, Canadian Children IBD Network (CIDsCaNN)</div></div>
+<div class="entry"><div class="entry-date">2025–Present</div><div class="entry-content">Chair, Paediatric Clinical Affairs Committee, Canadian Association of Gastroenterology (CAG)</div></div>
 <div class="entry"><div class="entry-date">2021–Present</div><div class="entry-content">Member, Steering Committee, Canadian Children IBD Network (CIDsCaNN). Monthly 2-hour meetings.</div></div>
 <div class="entry"><div class="entry-date">2021–Present</div><div class="entry-content">Member, Basic and Translational Research Committee, CIDsCaNN</div></div>
 <div class="entry"><div class="entry-date">2021–2022</div><div class="entry-content">Physician Representative, Working Group to revise best practices for Grants-In-Aid, Crohn's and Colitis Canada</div></div>
@@ -662,6 +680,9 @@ Nowhere is the need for individualized treatment greater than in IBD, where ther
 My teaching philosophy, broadly, is to train the next generation of academic paediatric gastroenterologists, with a focus on IBD. Having had the privilege of being mentored by Drs. Griffiths and Kamath as a GI trainee, I recognize the paramount role that mentorship plays in shaping one's career; accordingly, mentorship is central to my own teaching philosophy. I wish to counsel and guide trainees and to help them achieve the scholarly and clinical knowledge, skills and experience needed to excel in academic positions across Canada and around the world, and to become leaders in their field. As a teacher, I strive to integrate the dissemination of theoretical knowledge in more formal settings, with teaching practical skills at the bedside and in clinic. I aim to create a learning environment that fosters critical thinking, problem-solving, and the ability to apply knowledge in real-world situations.
 </p>
 
+<div class="h2-section">3. Creative Professional Activities Statement</div>
+<p style="font-size:10pt; color:#555; margin-bottom:8pt;">Not applicable.</p>
+
 <!-- ============================================================ -->
 <!-- D. RESEARCH FUNDING -->
 <!-- ============================================================ -->
@@ -673,54 +694,58 @@ My teaching philosophy, broadly, is to train the next generation of academic pae
 <div class="h4-section">Funded</div>
 
 <div class="entry">
+  <div class="entry-date">2026–2028</div>
+  <div class="entry-content"><strong>Co-PI.</strong> EQUIBAYES: Equity-focused Bayesian Quantification of Heterogeneous Treatment Effects in Paediatric Inflammatory Bowel Disease. Data Sciences Institute (DSI) Catalyst Grant, co-sponsored by Edwin S. H. Leong Centre for Healthy Children, University of Toronto. NPI: Kuan Liu. Co-Is: Arjumand Siddiqi, Rahul Krishnan, Alexis Reeves. 50,000 CAD.</div>
+</div>
+<div class="entry">
   <div class="entry-date">Dec 2022–Nov 2024</div>
-  <div class="entry-content">Co-PI. Deciphering the Cellular Ecosystem of Primary Sclerosing Cholangitis. Chan Zuckerberg Initiative, Patient-Partnered Rare Pediatric Disease RFA. PI: MacParland, Sonya. Co-PI: Gary Bader. <strong>1,600,000 USD</strong> (additional 400,000 USD to patient partner). ~10% effort.</div>
+  <div class="entry-content"><strong>Co-PI.</strong> Deciphering the Cellular Ecosystem of Primary Sclerosing Cholangitis. Chan Zuckerberg Initiative, Patient-Partnered Rare Pediatric Disease RFA. PI: MacParland, Sonya. Co-PI: Gary Bader. 1,600,000 USD (additional 400,000 USD to patient partner). ~10% effort.</div>
 </div>
 <div class="entry">
   <div class="entry-date">Aug 2021–Jul 2025</div>
-  <div class="entry-content">PI. Ascertaining Population-Based Long-Term Outcomes in IBD Patients with PSC. Crohn's and Colitis Canada Grants-in-Aid. Co-PIs: Eric Benchimol, Sanjay Murthy. <strong>375,000 CAD</strong>. Extension ×1y for maternity leave.</div>
+  <div class="entry-content"><strong>PI.</strong> Ascertaining Population-Based Long-Term Outcomes in IBD Patients with PSC. Crohn's and Colitis Canada Grants-in-Aid. Co-PIs: Eric Benchimol, Sanjay Murthy. 375,000 CAD. Extension ×1y for maternity leave.</div>
 </div>
 <div class="entry">
   <div class="entry-date">Dec 2021–Nov 2024</div>
-  <div class="entry-content">Co-Applicant (Co-Investigator). Single Cell Atlas of Human Pediatric Livers Across Diverse Ancestry. Chan Zuckerberg Initiative. PI: Mullen, Allen. <strong>2,000,000 USD</strong>.</div>
+  <div class="entry-content"><strong>Co-Applicant (Co-Investigator).</strong> Single Cell Atlas of Human Pediatric Livers Across Diverse Ancestry. Chan Zuckerberg Initiative. PI: Mullen, Allen. 2,000,000 USD.</div>
 </div>
 <div class="entry">
   <div class="entry-date">2019–2024</div>
-  <div class="entry-content">Co-Investigator. Childhood Liver Disease Research Network (ChiLDReN). NIH, NIDDK. <strong>1,450,000 USD</strong> to SickKids. ~5% effort.</div>
+  <div class="entry-content"><strong>Co-Investigator.</strong> Childhood Liver Disease Research Network (ChiLDReN). NIH, NIDDK. 1,450,000 USD to SickKids. ~5% effort.</div>
 </div>
 <div class="entry">
   <div class="entry-date">Apr 2021–May 2023</div>
-  <div class="entry-content">PI. Unravelling the genetic landscape of pediatric primary sclerosing cholangitis using whole exome sequencing. NIH. Collaborators: Binita Kamath, Aleixo Muise. <strong>56,000 USD</strong>. Extension ×1y for maternity leave.</div>
+  <div class="entry-content"><strong>PI.</strong> Unravelling the genetic landscape of paediatric primary sclerosing cholangitis using whole exome sequencing. NIH. Collaborators: Binita Kamath, Aleixo Muise. 56,000 USD. Extension ×1y for maternity leave.</div>
 </div>
 <div class="entry">
   <div class="entry-date">Jan 2020–Dec 2023</div>
-  <div class="entry-content">PI. Serum cytokine profiles to predict anti-TNF response in pediatric inflammatory bowel disease. Crohn's and Colitis Foundation of America, PRO-KIIDS. Co-Is: Thomas Walters, Carmen Argmann, Anne Griffiths, Anthony Otley, David Mack. <strong>219,966 USD</strong>. NCE ×1y + extension ×1y for maternity leave.</div>
+  <div class="entry-content"><strong>PI.</strong> Serum cytokine profiles to predict anti-TNF response in paediatric inflammatory bowel disease. Crohn's and Colitis Foundation of America, PRO-KIIDS. Co-Is: Thomas Walters, Carmen Argmann, Anne Griffiths, Anthony Otley, David Mack. 219,966 USD. NCE ×1y + extension ×1y for maternity leave.</div>
 </div>
 <div class="entry">
   <div class="entry-date">2020–2024</div>
-  <div class="entry-content">Co-PI. Role of microbes in the pathogenesis of Pediatric IBD. CIHR Team Grant: CMI2. PI: Vallance, Bruce. <strong>2,000,000 CAD</strong>. ~10% effort.</div>
+  <div class="entry-content"><strong>Co-PI.</strong> Role of microbes in the pathogenesis of Paediatric IBD. CIHR Team Grant: CMI2. PI: Vallance, Bruce. 2,000,000 CAD. ~10% effort.</div>
 </div>
 <div class="entry">
   <div class="entry-date">2020–2024</div>
-  <div class="entry-content">Co-Applicant (Co-Investigator). Defining the immune dysregulation underlying Pediatric IBD. CIHR Team Grant: Human Immunology Initiative. PI: Aleixo Muise. <strong>1,514,500 CAD</strong>.</div>
+  <div class="entry-content"><strong>Co-Applicant (Co-Investigator).</strong> Defining the immune dysregulation underlying Paediatric IBD. CIHR Team Grant: Human Immunology Initiative. PI: Aleixo Muise. 1,514,500 CAD.</div>
 </div>
 <div class="entry">
   <div class="entry-date">2021–2026</div>
-  <div class="entry-content">Co-Investigator. Canadian Children IBD Network (CIDsCaNN) funding renewal. Ch.I.L.D. Foundation. Co-PIs: Anne Griffiths, David Mack. <strong>5,000,000 CAD</strong>. ~10% effort.</div>
+  <div class="entry-content"><strong>Co-Investigator.</strong> Canadian Children IBD Network (CIDsCaNN) funding renewal. Ch.I.L.D. Foundation. Co-PIs: Anne Griffiths, David Mack. 5,000,000 CAD. ~10% effort.</div>
 </div>
 <div class="entry">
   <div class="entry-date">2020–2023</div>
-  <div class="entry-content">Co-Applicant (Co-Investigator). Defining and Targeting Autoimmune Liver Disease. CIHR Team Grant: Human Immunology Initiative. PI: MacParland, Sonya. <strong>1,600,000 CAD</strong>.</div>
+  <div class="entry-content"><strong>Co-Applicant (Co-Investigator).</strong> Defining and Targeting Autoimmune Liver Disease. CIHR Team Grant: Human Immunology Initiative. PI: MacParland, Sonya. 1,600,000 CAD.</div>
 </div>
 <div class="entry">
   <div class="entry-date">Aug 2019–Jul 2020</div>
-  <div class="entry-content">PI. Serum cytokine profile for predicting anti-TNF responsiveness in pediatric IBD. FLIBD. Co-PIs: Thomas Walters, Anne Griffiths. <strong>33,000 CAD</strong>.</div>
+  <div class="entry-content"><strong>PI.</strong> Serum cytokine profile for predicting anti-TNF responsiveness in paediatric IBD. FLIBD. Co-PIs: Thomas Walters, Anne Griffiths. 33,000 CAD.</div>
 </div>
 
 <div class="h2-section">2. Salary Support and Other Funding</div>
 
 <div class="h3-section">Personal Salary Support (Trainee Stage)</div>
-<div class="entry"><div class="entry-date">Dec 2017–Dec 2018</div><div class="entry-content">NASPGHAN Foundation Fellow to Faculty Transition Award in Pediatric IBD. 75,000 USD.</div></div>
+<div class="entry"><div class="entry-date">Dec 2017–Dec 2018</div><div class="entry-content">NASPGHAN Foundation Fellow to Faculty Transition Award in Paediatric IBD. 75,000 USD.</div></div>
 <div class="entry"><div class="entry-date">Jan 2017–Dec 2017</div><div class="entry-content">RESTRACOMP MD Scholarship and Fellowship, SickKids RI. 80,000 CAD over 2 years (year 2 declined).</div></div>
 <div class="entry"><div class="entry-date">Jul 2016–Sep 2017</div><div class="entry-content">Canadian Liver Foundation Taking Action Against PSC Graduate Studentship. 40,000 CAD over 2 years (year 2 declined).</div></div>
 
@@ -730,7 +755,7 @@ My teaching philosophy, broadly, is to train the next generation of academic pae
 <div class="entry"><div class="entry-date">May 2023–Apr 2025</div><div class="entry-content">Pfizer Global Medical Grants Fellowship (Lorraine Stallard). 104,000 CAD.</div></div>
 
 <div class="h3-section">Other Funding (Non-Peer-Reviewed)</div>
-<div class="entry"><div class="entry-date">Apr 2021–Mar 2026</div><div class="entry-content">Co-Lead. Philanthropic donation from Lassonde family to establish Precision IBD program at SickKids. Co-Lead: Aleixo Muise. <strong>5,000,000 CAD</strong>.</div></div>
+<div class="entry"><div class="entry-date">Apr 2021–Mar 2026</div><div class="entry-content"><strong>Co-Lead.</strong> Philanthropic donation from Lassonde family to establish Precision IBD program at SickKids. Co-Lead: Aleixo Muise. 5,000,000 CAD.</div></div>
 
 <!-- ============================================================ -->
 <!-- E. PUBLICATIONS -->
@@ -753,9 +778,11 @@ My teaching philosophy, broadly, is to train the next generation of academic pae
 <!-- NEW publications (2023-2026) added at top in reverse chronological order -->
 <ol class="pub-list">
   <!-- 2026 -->
+  <li>Liu D, Dankar FK, deBruyn JC, <span class="author-me">Ricciuto A</span>, Griffiths AM, Walters TD, El Emam K. Machine learning models for estimating counterfactuals in a single-arm inflammatory bowel disease study. In preparation. Co-Author.</li>
   <li><span class="author-me">Ricciuto A</span>, Turinsky AL, Griffiths AM, Mack DR, Wine E, Benchimol EI, El-Matary W, Huynh HQ, Carman N, deBruyn JC, Otley AR, Church PC, Jacobson K, Low S, Broer E, Lawrence S, Sherlock M, Deslandres C, Walters TD. Primary infliximab failure in pediatric colonic inflammatory bowel disease: Development of a proteomics predictive model using a prospective Canadian cohort. <em>Inflamm Bowel Dis</em>. 2026. Online ahead of print. PMID: 41671043. DOI: 10.1093/ibd/izaf329. Principal Author.</li>
   <li>Leung KK, Li W, Hansen B, Gulamhusein A, Lapointe-Shaw L, <span class="author-me">Ricciuto A</span>, Benchimol EI, Flemming JA, Hirschfield GM. Understanding hepatopancreatobiliary cancer risks in a population-based primary sclerosing cholangitis-inflammatory bowel disease cohort. <em>Hepatology</em>. 2026. Online ahead of print. PMID: 41637315. DOI: 10.1097/HEP.0000000000001692. Co-Author.</li>
   <li>Taylor SA, Bader GD, MacParland S, Mullen AC, Andrews T, [...], <span class="author-me">Ricciuto A</span>, [...], Zhen M. Towards a reference cell atlas of liver diversity over the human lifespan. <em>Nat Rev Gastroenterol Hepatol</em>. 2026;23(1):97-109. PMID: 41083606. DOI: 10.1038/s41575-025-01114-3. Co-Author.</li>
+  <li>Zou Y, Hu L, <span class="author-me">Ricciuto A</span>, Deneau M, Liu K. Bayesian Sensitivity Analysis for Causal Estimation with Time-varying Unmeasured Confounding. <em>Stat Med</em>. Accepted. Co-Author.</li>
   <!-- 2025 -->
   <li>Edgar RD, Nakib D, Camat D, Chung S, Lumanto P, Atif J, Perciani CT, Ma XZ, Thoeni C, Selvakumaran N, Manuel J, Sayed B, Huysentruyt K, <span class="author-me">Ricciuto A</span>, McGilvray I, Avitzur Y, Bader GD, MacParland SA. Single-cell atlas of human pediatric liver reveals age-related hepatic gene signatures. <em>Hepatol Commun</em>. 2025. PMID: 41056487. Co-Author.</li>
   <li>van Rheenen PF, Kolho KL, Russell RK, Aloi M, [...], <span class="author-me">Ricciuto A</span>, [...], Indolfi G. Primary sclerosing cholangitis in children with inflammatory bowel disease: An ESPGHAN position paper from the Hepatology Committee and the IBD Porto group. <em>J Pediatr Gastroenterol Nutr</em>. 2025. PMID: 39741383. Co-Author.</li>
@@ -840,6 +867,12 @@ My teaching philosophy, broadly, is to train the next generation of academic pae
 </ol>
 
 <!-- ============================================================ -->
+<!-- F. PATENTS AND COPYRIGHTS -->
+<!-- ============================================================ -->
+<div class="h1-section">F. Patents and Copyrights</div>
+<p style="font-size:10pt; color:#555; margin-bottom:8pt;">None.</p>
+
+<!-- ============================================================ -->
 <!-- G. PRESENTATIONS AND SPECIAL LECTURES -->
 <!-- ============================================================ -->
 <div class="h1-section">G. Presentations and Special Lectures</div>
@@ -847,7 +880,7 @@ My teaching philosophy, broadly, is to train the next generation of academic pae
 <div class="h2-section">1. International</div>
 <div class="h3-section">Invited Lectures and Presentations</div>
 <ul class="pres-list">
-  <li><strong>Dec 2023:</strong> Liver Disease and Complications in Pediatric IBD. Advances in IBD (AIBD). Orlando, FL, US.</li>
+  <li><strong>Dec 2023:</strong> Liver Disease and Complications in Paediatric IBD. Advances in IBD (AIBD). Orlando, FL, US.</li>
   <li><strong>May 2023:</strong> Management of the PSC Patient with Severe Colitis: Use of Biologics and Surgery. Digestive Disease Week (DDW). Chicago, IL, US.</li>
   <li><strong>Oct 2022:</strong> Prognostic Scoring Systems in PSC and Other Prognostic Factors. NASPGHAN. Orlando, FL, US.</li>
   <li><strong>Sep 2022:</strong> New Lessons in Difficult Areas: PSC-IBD. 6th International Symposium on PIBD. Edinburgh, Scotland.</li>
@@ -856,24 +889,25 @@ My teaching philosophy, broadly, is to train the next generation of academic pae
   <li><strong>Nov 2021:</strong> Facilitator, Biomarkers and Therapeutics in Autoimmune and Cholestatic Liver Diseases. AASLD. Virtual.</li>
   <li><strong>May 2021:</strong> PSC-IBD: When Two Worlds Collide. Virtual to Hospital Santo Antonio, Brazil.</li>
   <li><strong>Jul 2020:</strong> Journal Club. Virtual Center for Autoimmune Liver Disease, Cincinnati Children's Hospital.</li>
-  <li><strong>Dec 2019:</strong> Hepatology for the Pediatric IBDologist. AIBD. Orlando, FL, US.</li>
+  <li><strong>Dec 2019:</strong> Hepatology for the Paediatric IBDologist. AIBD. Orlando, FL, US.</li>
   <li><strong>Dec 2019:</strong> Panelist, Challenging Cases in IBD. AIBD. Orlando, FL, US.</li>
   <li><strong>Oct 2019:</strong> Meet the Professor: Complex Cases in IBD and the Liver. NASPGHAN. Chicago, IL, US.</li>
-  <li><strong>Oct 2018:</strong> Delineating the Phenotype of Pediatric PSC-IBD. NASPGHAN. Fort Lauderdale, FL, US.</li>
+  <li><strong>Oct 2018:</strong> Delineating the Phenotype of Paediatric PSC-IBD. NASPGHAN. Fort Lauderdale, FL, US.</li>
 </ul>
 
 <div class="h2-section">2. National</div>
 <div class="h3-section">Invited Lectures and Presentations</div>
 <ul class="pres-list">
-  <li><strong>Jan 2023:</strong> Pediatric IBD – Why aren't they just little adults? Canadian GI Trainees Program in IBD. Toronto, ON.</li>
+  <li><strong>Sep 2026:</strong> Gastroenterology and Hepatology Research Rounds (virtual). University of Alberta. Edmonton, AB.</li>
+  <li><strong>Jan 2023:</strong> Paediatric IBD – Why aren't they just little adults? Canadian GI Trainees Program in IBD. Toronto, ON.</li>
   <li><strong>Nov 2022:</strong> Road to Academic Success: Grant writing and publishing. Meeting of the Minds. Toronto, ON. (with Gilaad Kaplan)</li>
   <li><strong>Nov 2021:</strong> Early Career Investigator Panel. CITAC Annual Symposium. Virtual.</li>
   <li><strong>Nov 2021:</strong> Mentorship in Action. CITAC Annual Symposium. Virtual.</li>
   <li><strong>Mar 2021:</strong> Facilitator, Cage Match: Which treatment, which target in IBD? CDDW. Virtual.</li>
   <li><strong>Dec 2020:</strong> Disease Activity Influences COVID-19 Outcomes Especially in Younger IBD Patients. CCC COVID-19 Task Force. Virtual.</li>
-  <li><strong>Feb 2020:</strong> Pediatric autoimmune liver disease and transition to adult care. CDDW. Montreal, QC.</li>
+  <li><strong>Feb 2020:</strong> Paediatric autoimmune liver disease and transition to adult care. CDDW. Montreal, QC.</li>
   <li><strong>Nov 2019:</strong> Paediatric perspectives on autoimmune liver disease. CASL Single Topic Symposium. Ottawa, ON.</li>
-  <li><strong>Nov 2019:</strong> Reliability and validity assessment of endoscopic activity indices in pediatric UC. Meeting of the Minds. Toronto, ON.</li>
+  <li><strong>Nov 2019:</strong> Reliability and validity assessment of endoscopic activity indices in paediatric UC. Meeting of the Minds. Toronto, ON.</li>
   <li><strong>Mar 2019:</strong> Drug-induced liver injury in IBD. CDDW. Banff, AB. (with Kevan Jacobson)</li>
 </ul>
 
@@ -907,7 +941,7 @@ My teaching philosophy, broadly, is to train the next generation of academic pae
 <div class="entry"><div class="entry-date">2021, 2023</div><div class="entry-content">Case-based approach to medical treatment of IBD (1-hour lecture, 10-15 fellows)</div></div>
 
 <div class="h3-section">Continuing Education (Other Health Professionals)</div>
-<div class="entry"><div class="entry-date">2020</div><div class="entry-content">Pediatric IBD Imaging Course Co-Director (1-2 day course, ~50 audience; suspended due to COVID-19)</div></div>
+<div class="entry"><div class="entry-date">2020</div><div class="entry-content">Paediatric IBD Imaging Course Co-Director (1-2 day course, ~50 audience; suspended due to COVID-19)</div></div>
 <div class="entry"><div class="entry-date">2019–Present</div><div class="entry-content">SickKids IBD Centre of Excellence Annual Symposium (2-day course, ~30 audience; suspended 2020/2021 for COVID-19)</div></div>
 
 <div class="h3-section">Public/Lay</div>
@@ -920,46 +954,48 @@ My teaching philosophy, broadly, is to train the next generation of academic pae
 <!-- ============================================================ -->
 <div class="h1-section">I. Research Supervision</div>
 
-<div class="h2-section">1. Primary or Co-Supervision</div>
+<div class="h2-section">2. Graduate Education</div>
 
-<div class="h3-section">Clinical Research Fellow (MD) and Graduate Student</div>
-
-<div class="entry">
-  <div class="entry-date">Jul 2022–Present</div>
-  <div class="entry-content"><strong>Rabia Khan</strong> (Co-Primary Supervisor). Research Fellow, SickKids; MSc, Clinical Epidemiology, University of Newcastle, Australia. Topic: Ascertaining Population-Based Long-Term Outcomes in IBD Patients with PSC. Awards: TRIANGLE Amplify Award; CSTP Fellowship. Supervisors: Amanda Ricciuto, Eric Benchimol.</div>
-</div>
-<div class="entry">
-  <div class="entry-date">Jul 2021–Jun 2023</div>
-  <div class="entry-content"><strong>Rebecca Little</strong> (Primary Supervisor). Staff Gastroenterologist, Royal Belfast Hospital for Sick Children. Research Fellow, SickKids; MSc, Clinical Epidemiology, LSHTM. Topic: Long-term outcomes for paediatric-onset PSC. Awards: Dick Hamilton Award; top abstract at 6th PIBD Symposium. Supervisors: Amanda Ricciuto (primary), Anne Griffiths, Binita Kamath. Completed 2023.</div>
-</div>
 <div class="entry">
   <div class="entry-date">Jul 2020–Jan 2023</div>
-  <div class="entry-content"><strong>Rilla Schneider</strong> (Co-Supervisor and Thesis Committee Member). Research Fellow, SickKids; MSc, IHPME, UofT. Topic: Paediatric Crohn's disease: The impact of first maintenance therapy. Awards: Beverly Antle Trainee Award; SickKids GI Research Day Oral Presentation Award. Supervisors: Geoffrey Nguyen (primary), Anne Griffiths, Peter Church, Amanda Ricciuto, Eleanor Pullenayegum. Completed 2023.</div>
+  <div class="entry-content"><strong>Co-Supervisor and Thesis Committee Member</strong>, Rilla Schneider. Student's Current Position: Research Fellow, SickKids. MSc, IHPME, UofT. <em>Paediatric Crohn's disease: The impact of first maintenance therapy.</em> Awards: Beverly Antle Trainee Award; SickKids GI Research Day Oral Presentation Award. Collaborators: Geoffrey Nguyen (primary), Anne Griffiths, Peter Church, Eleanor Pullenayegum. Completed 2023.</div>
 </div>
 
-<div class="h3-section">Clinical Research Fellow (MD)</div>
-
-<div class="entry">
-  <div class="entry-date">Jul 2022–Jun 2024</div>
-  <div class="entry-content"><strong>Ghaida Dahlwi</strong> (Primary Supervisor). Research Fellow, SickKids. Topic: Sarcopenia in paediatric PSC-IBD. Supervisors: Amanda Ricciuto (primary), Peter Church.</div>
-</div>
-<div class="entry">
-  <div class="entry-date">Jul 2021–Jun 2023</div>
-  <div class="entry-content"><strong>Lorraine Stallard</strong> (Co-Primary Supervisor). 3rd year GI Fellow, SickKids. Topic: BSA-based dosing of infliximab in very early onset-IBD. Awards: CAG Resident Research Award. Supervisors: Amanda Ricciuto, Aleixo Muise. Completed 2023.</div>
-</div>
-<div class="entry">
-  <div class="entry-date">Jul 2020–Jun 2022</div>
-  <div class="entry-content"><strong>Mohammed Ayoub</strong> (Co-Supervisor). Staff Paediatric Gastroenterologist, Saudi Arabia. Research Fellow, SickKids. Topic: Liver enzyme variability in Alagille syndrome. Supervisors: Binita Kamath (primary), Bettina Hansen, Amanda Ricciuto. Completed 2022.</div>
-</div>
+<div class="h2-section">3. Undergraduate MD</div>
 
 <div class="h3-section">Summer Students</div>
 
-<div class="entry"><div class="entry-date">2023</div><div class="entry-content"><strong>Sophie Zarb</strong> (Medical Student, University of Ottawa) – NASPGHAN Foundation program</div></div>
-<div class="entry"><div class="entry-date">2023</div><div class="entry-content"><strong>Claudia Tersigni</strong> (Medical Student, Western University) – NASPGHAN Foundation program</div></div>
-<div class="entry"><div class="entry-date">2023</div><div class="entry-content"><strong>Emma Boer</strong> (Medical Student, University College Dublin) – SickKids SSuRE program</div></div>
-<div class="entry"><div class="entry-date">2021</div><div class="entry-content"><strong>David Friedland</strong> (Undergraduate, McGill University) – SickKids SSuRE program. Awards: Lunenfeld Summer Studentship ($2,000 CAD)</div></div>
-<div class="entry"><div class="entry-date">2019, 2020</div><div class="entry-content"><strong>Sophie Zarb</strong> (Undergraduate, McMaster University) – SickKids SSuRE program</div></div>
-<div class="entry"><div class="entry-date">2021</div><div class="entry-content"><strong>Sophie Rossini</strong> (Medical Student, Queen's University) – SickKids SSuRE program</div></div>
+<div class="entry"><div class="entry-date">2023</div><div class="entry-content"><strong>Supervisor</strong>, Sophie Zarb (Medical Student, University of Ottawa) – NASPGHAN Foundation program</div></div>
+<div class="entry"><div class="entry-date">2023</div><div class="entry-content"><strong>Supervisor</strong>, Claudia Tersigni (Medical Student, Western University) – NASPGHAN Foundation program</div></div>
+<div class="entry"><div class="entry-date">2023</div><div class="entry-content"><strong>Supervisor</strong>, Emma Boer (Medical Student, University College Dublin) – SickKids SSuRE program</div></div>
+<div class="entry"><div class="entry-date">2021</div><div class="entry-content"><strong>Supervisor</strong>, David Friedland (Undergraduate, McGill University) – SickKids SSuRE program. Awards: Lunenfeld Summer Studentship ($2,000 CAD)</div></div>
+<div class="entry"><div class="entry-date">2019, 2020</div><div class="entry-content"><strong>Supervisor</strong>, Sophie Zarb (Undergraduate, McMaster University) – SickKids SSuRE program</div></div>
+<div class="entry"><div class="entry-date">2021</div><div class="entry-content"><strong>Supervisor</strong>, Sophie Rossini (Medical Student, Queen's University) – SickKids SSuRE program</div></div>
+
+<div class="h2-section">4. Postgraduate MD</div>
+
+<div class="h3-section">Clinical Research Fellows</div>
+
+<div class="entry">
+  <div class="entry-date">Jul 2022–Present</div>
+  <div class="entry-content"><strong>Co-Primary Supervisor</strong>, Rabia Khan. Student's Current Position: Research Fellow, SickKids. MSc, Clinical Epidemiology, University of Newcastle, Australia. <em>Ascertaining Population-Based Long-Term Outcomes in IBD Patients with PSC.</em> Awards: TRIANGLE Amplify Award; CSTP Fellowship. Collaborators: Eric Benchimol.</div>
+</div>
+<div class="entry">
+  <div class="entry-date">Jul 2021–Jun 2023</div>
+  <div class="entry-content"><strong>Primary Supervisor</strong>, Rebecca Little. Student's Current Position: Staff Gastroenterologist, Royal Belfast Hospital for Sick Children. Research Fellow, SickKids; MSc, Clinical Epidemiology, LSHTM. <em>Long-term outcomes for paediatric-onset PSC.</em> Awards: Dick Hamilton Award; top abstract at 6th PIBD Symposium. Collaborators: Anne Griffiths, Binita Kamath. Completed 2023.</div>
+</div>
+<div class="entry">
+  <div class="entry-date">Jul 2022–Jun 2024</div>
+  <div class="entry-content"><strong>Primary Supervisor</strong>, Ghaida Dahlwi. Research Fellow, SickKids. <em>Sarcopenia in paediatric PSC-IBD.</em> Collaborators: Peter Church.</div>
+</div>
+<div class="entry">
+  <div class="entry-date">Jul 2021–Jun 2023</div>
+  <div class="entry-content"><strong>Co-Primary Supervisor</strong>, Lorraine Stallard. 3rd year GI Fellow, SickKids. <em>BSA-based dosing of infliximab in very early onset-IBD.</em> Awards: CAG Resident Research Award. Collaborators: Aleixo Muise. Completed 2023.</div>
+</div>
+<div class="entry">
+  <div class="entry-date">Jul 2020–Jun 2022</div>
+  <div class="entry-content"><strong>Co-Supervisor</strong>, Mohammed Ayoub. Student's Current Position: Staff Paediatric Gastroenterologist, Saudi Arabia. Research Fellow, SickKids. <em>Liver enzyme variability in Alagille syndrome.</em> Collaborators: Binita Kamath (primary), Bettina Hansen. Completed 2022.</div>
+</div>
 
 <!-- ============================================================ -->
 <!-- J. CREATIVE PROFESSIONAL ACTIVITIES -->
