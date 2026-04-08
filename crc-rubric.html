@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CIDsCaNN CRC — Proposal Evaluation Rubric</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #1a1a1a;
+    background: #f5f7fa;
+    margin: 0;
+    padding: 20px;
+  }
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    margin-bottom: 28px;
+    padding: 24px 20px 18px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    border-top: 4px solid #1a5276;
+  }
+  .header h1 {
+    font-size: 1.5rem;
+    color: #1a5276;
+    margin: 0 0 2px;
+  }
+  .header h2 {
+    font-size: 1.1rem;
+    color: #555;
+    font-weight: 500;
+    margin: 0;
+  }
+  .header p {
+    font-size: 13px;
+    color: #888;
+    margin: 10px 0 0;
+  }
+
+  /* Sections */
+  .section {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    overflow: hidden;
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    background: #eaf0f6;
+    border-bottom: 1px solid #ddd;
+  }
+  .section-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: #1a5276;
+    color: #fff;
+    border-radius: 50%;
+    font-size: 13px;
+    font-weight: 700;
+    margin-right: 10px;
+    flex-shrink: 0;
+  }
+  .section-header h3 {
+    margin: 0;
+    font-size: 0.95rem;
+    color: #1a5276;
+  }
+  .section-body {
+    padding: 16px;
+  }
+  .section-body .prompt {
+    font-size: 13px;
+    color: #555;
+    margin: 0 0 14px;
+    font-style: italic;
+  }
+
+  /* Proposal info fields */
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .info-grid .full { grid-column: 1 / -1; }
+  .field label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 3px;
+  }
+  .field input, .field select, .field textarea {
+    width: 100%;
+    padding: 7px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 13px;
+    font-family: inherit;
+    background: #fff;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus {
+    outline: none;
+    border-color: #1a5276;
+    box-shadow: 0 0 0 2px rgba(26, 82, 118, 0.15);
+  }
+  .field textarea { resize: vertical; min-height: 60px; }
+
+  /* Rating scale */
+  .rating-scale {
+    display: flex;
+    gap: 0;
+    margin-bottom: 14px;
+  }
+  .rating-option {
+    flex: 1;
+    text-align: center;
+    cursor: pointer;
+    padding: 10px 4px;
+    border: 1px solid #ddd;
+    margin-right: -1px;
+    transition: all 0.15s;
+    position: relative;
+  }
+  .rating-option:first-child { border-radius: 6px 0 0 6px; }
+  .rating-option:last-child { border-radius: 0 6px 6px 0; margin-right: 0; }
+  .rating-option:hover { background: #f0f4f8; }
+  .rating-option.selected {
+    background: #1a5276;
+    border-color: #1a5276;
+    color: #fff;
+    z-index: 1;
+  }
+  .rating-option .rating-value {
+    font-size: 18px;
+    font-weight: 700;
+    display: block;
+  }
+  .rating-option .rating-label {
+    font-size: 10px;
+    display: block;
+    margin-top: 2px;
+    line-height: 1.2;
+  }
+  .rating-option.selected .rating-label { color: rgba(255,255,255,0.85); }
+
+  /* Choice buttons (for non-numeric scales) */
+  .choice-group {
+    display: flex;
+    gap: 0;
+    margin-bottom: 14px;
+  }
+  .choice-btn {
+    flex: 1;
+    text-align: center;
+    cursor: pointer;
+    padding: 10px 8px;
+    border: 1px solid #ddd;
+    margin-right: -1px;
+    transition: all 0.15s;
+    font-size: 13px;
+    font-weight: 600;
+    background: #fff;
+    position: relative;
+  }
+  .choice-btn:first-child { border-radius: 6px 0 0 6px; }
+  .choice-btn:last-child { border-radius: 0 6px 6px 0; margin-right: 0; }
+  .choice-btn:hover { background: #f0f4f8; }
+  .choice-btn.selected {
+    background: #1a5276;
+    border-color: #1a5276;
+    color: #fff;
+    z-index: 1;
+  }
+  .choice-btn.selected.green { background: #1e7e34; border-color: #1e7e34; }
+  .choice-btn.selected.amber { background: #d68910; border-color: #d68910; }
+  .choice-btn.selected.red { background: #c0392b; border-color: #c0392b; }
+
+  /* Checkbox group */
+  .checkbox-group {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+  }
+  .checkbox-group label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    cursor: pointer;
+  }
+  .checkbox-group input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: #1a5276;
+  }
+
+  /* Submit area */
+  .submit-area {
+    text-align: center;
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-top: 16px;
+  }
+  .submit-btn {
+    padding: 12px 40px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+    background: #1a5276;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .submit-btn:hover { background: #154360; }
+  .submit-btn:disabled {
+    background: #aaa;
+    cursor: not-allowed;
+  }
+  .submit-status {
+    margin-top: 10px;
+    font-size: 13px;
+    color: #888;
+  }
+  .submit-status.success { color: #1e7e34; font-weight: 600; }
+  .submit-status.error { color: #c0392b; }
+
+  /* Config banner */
+  .config-banner {
+    background: #fff3cd;
+    border: 1px solid #ffc107;
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin-bottom: 16px;
+    font-size: 13px;
+    color: #856404;
+  }
+  .config-banner code {
+    background: #f8f0d8;
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-size: 12px;
+  }
+  .config-banner.hidden { display: none; }
+
+  /* Print styles */
+  @media print {
+    body { background: #fff; padding: 0; }
+    .section { break-inside: avoid; }
+    .submit-area, .config-banner { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="header">
+    <h1>CIDsCaNN Clinical Research Committee</h1>
+    <h2>Proposal Evaluation Rubric</h2>
+    <p>Please complete all sections and submit your evaluation. Responses are automatically collated.</p>
+  </div>
+
+  <div id="configBanner" class="config-banner">
+    <strong>Setup required:</strong> To enable automatic submission to Google Sheets, replace the
+    <code>GOOGLE_SCRIPT_URL</code> value in the page source with your deployed Google Apps Script URL.
+    See the setup instructions in the page comments.
+  </div>
+
+  <!-- Proposal Info -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-number">i</span>
+      <h3>Proposal Information</h3>
+    </div>
+    <div class="section-body">
+      <div class="info-grid">
+        <div class="field full">
+          <label for="proposalTitle">Proposal Title</label>
+          <input type="text" id="proposalTitle" placeholder="Enter the proposal title">
+        </div>
+        <div class="field">
+          <label for="investigators">Principal Investigator(s)</label>
+          <input type="text" id="investigators" placeholder="Name(s)">
+        </div>
+        <div class="field">
+          <label for="dateReviewed">Date Reviewed</label>
+          <input type="date" id="dateReviewed">
+        </div>
+        <div class="field">
+          <label for="reviewerName">Your Name</label>
+          <input type="text" id="reviewerName" placeholder="Reviewer name">
+        </div>
+        <div class="field">
+          <label for="reviewerRole">Your Role</label>
+          <select id="reviewerRole">
+            <option value="">Select...</option>
+            <option value="Co-Chair">Co-Chair</option>
+            <option value="Member">Member</option>
+            <option value="Trainee Member">Trainee Member</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 1. Feasibility -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-number">1</span>
+      <h3>Feasibility</h3>
+    </div>
+    <div class="section-body">
+      <p class="prompt">Is the proposed study likely to be successfully completed within the stated timeline and with the available resources?</p>
+      <div class="rating-scale" data-field="feasibility">
+        <div class="rating-option" data-value="1" onclick="selectRating(this)">
+          <span class="rating-value">1</span>
+          <span class="rating-label">Very Low</span>
+        </div>
+        <div class="rating-option" data-value="2" onclick="selectRating(this)">
+          <span class="rating-value">2</span>
+          <span class="rating-label">Low</span>
+        </div>
+        <div class="rating-option" data-value="3" onclick="selectRating(this)">
+          <span class="rating-value">3</span>
+          <span class="rating-label">Moderate</span>
+        </div>
+        <div class="rating-option" data-value="4" onclick="selectRating(this)">
+          <span class="rating-value">4</span>
+          <span class="rating-label">High</span>
+        </div>
+        <div class="rating-option" data-value="5" onclick="selectRating(this)">
+          <span class="rating-value">5</span>
+          <span class="rating-label">Very High</span>
+        </div>
+      </div>
+      <div class="field">
+        <label for="feasibilityComments">Comments on feasibility</label>
+        <textarea id="feasibilityComments" rows="3" placeholder="Optional comments..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Methodology -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-number">2</span>
+      <h3>Methodology</h3>
+    </div>
+    <div class="section-body">
+      <p class="prompt">Is the proposed methodology robust, appropriate, and well-described for the study objectives?</p>
+      <div class="rating-scale" data-field="methodology">
+        <div class="rating-option" data-value="1" onclick="selectRating(this)">
+          <span class="rating-value">1</span>
+          <span class="rating-label">Major Concerns</span>
+        </div>
+        <div class="rating-option" data-value="2" onclick="selectRating(this)">
+          <span class="rating-value">2</span>
+          <span class="rating-label">Significant Gaps</span>
+        </div>
+        <div class="rating-option" data-value="3" onclick="selectRating(this)">
+          <span class="rating-value">3</span>
+          <span class="rating-label">Adequate</span>
+        </div>
+        <div class="rating-option" data-value="4" onclick="selectRating(this)">
+          <span class="rating-value">4</span>
+          <span class="rating-label">Strong</span>
+        </div>
+        <div class="rating-option" data-value="5" onclick="selectRating(this)">
+          <span class="rating-value">5</span>
+          <span class="rating-label">Excellent</span>
+        </div>
+      </div>
+      <div class="field">
+        <label for="methodologyFeedback">Suggestions for improvement</label>
+        <textarea id="methodologyFeedback" rows="4" placeholder="Please provide specific feedback on the methodology, including any recommended changes..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Funding -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-number">3</span>
+      <h3>Funding</h3>
+    </div>
+    <div class="section-body">
+      <p class="prompt">If applicable, is the proposal adequately funded to achieve its objectives?</p>
+      <div class="choice-group" data-field="funding">
+        <div class="choice-btn" data-value="Adequately funded" onclick="selectChoice(this)">Adequately funded</div>
+        <div class="choice-btn" data-value="Partially funded" onclick="selectChoice(this)">Partially funded</div>
+        <div class="choice-btn" data-value="Not funded" onclick="selectChoice(this)">Not funded</div>
+        <div class="choice-btn" data-value="N/A" onclick="selectChoice(this)">N/A</div>
+      </div>
+      <div class="field">
+        <label for="fundingComments">Comments on funding</label>
+        <textarea id="fundingComments" rows="2" placeholder="Optional comments..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Network Resources -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-number">4</span>
+      <h3>Network Resources Required</h3>
+    </div>
+    <div class="section-body">
+      <p class="prompt">What CIDsCaNN network resources will the proposal require?</p>
+      <div class="checkbox-group" id="resourcesGroup">
+        <label><input type="checkbox" value="Retrospective data only"> Retrospective data only</label>
+        <label><input type="checkbox" value="Prospective study"> Prospective study</label>
+        <label><input type="checkbox" value="Biospecimens"> Biospecimens</label>
+        <label><input type="checkbox" value="Site coordination"> Site coordination</label>
+        <label><input type="checkbox" value="Other"> Other</label>
+      </div>
+      <div class="field">
+        <label for="resourcesComments">Please specify resources needed</label>
+        <textarea id="resourcesComments" rows="3" placeholder="e.g., data access, biospecimens, site coordination, personnel, funding..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. Priority & Clinical Relevance -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-number">5</span>
+      <h3>Priority and Clinical Relevance</h3>
+    </div>
+    <div class="section-body">
+      <p class="prompt">How would you rate the priority and clinical relevance of this proposal for the CIDsCaNN network?</p>
+      <div class="choice-group" data-field="priority">
+        <div class="choice-btn green" data-value="High" onclick="selectChoice(this)">High</div>
+        <div class="choice-btn amber" data-value="Intermediate" onclick="selectChoice(this)">Intermediate</div>
+        <div class="choice-btn red" data-value="Low" onclick="selectChoice(this)">Low</div>
+      </div>
+      <div class="field">
+        <label for="priorityComments">Comments on priority/relevance</label>
+        <textarea id="priorityComments" rows="3" placeholder="Optional comments..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. Overall Recommendation -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-number">6</span>
+      <h3>Overall Recommendation</h3>
+    </div>
+    <div class="section-body">
+      <div class="choice-group" data-field="recommendation">
+        <div class="choice-btn green" data-value="Accept" onclick="selectChoice(this)">Accept</div>
+        <div class="choice-btn amber" data-value="Accept with revisions" onclick="selectChoice(this)">Accept with revisions</div>
+        <div class="choice-btn" data-value="Major revisions required" onclick="selectChoice(this)">Major revisions required</div>
+        <div class="choice-btn red" data-value="Decline" onclick="selectChoice(this)">Decline</div>
+      </div>
+      <div class="field">
+        <label for="overallComments">Additional comments</label>
+        <textarea id="overallComments" rows="4" placeholder="Any additional feedback for the investigators..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- Submit -->
+  <div class="submit-area">
+    <button class="submit-btn" id="submitBtn" onclick="submitForm()">Submit Evaluation</button>
+    <div class="submit-status" id="submitStatus"></div>
+  </div>
+
+</div>
+
+<script>
+/*
+ * ============================================================
+ * GOOGLE SHEETS BACKEND SETUP INSTRUCTIONS
+ * ============================================================
+ *
+ * 1. Go to https://sheets.google.com and create a new spreadsheet.
+ *    Name it something like "CIDsCaNN CRC Proposal Evaluations".
+ *
+ * 2. In row 1, add these column headers (in order):
+ *    Timestamp | Proposal Title | Investigators | Date Reviewed |
+ *    Reviewer | Role | Feasibility | Feasibility Comments |
+ *    Methodology | Methodology Feedback | Funding | Funding Comments |
+ *    Resources | Resources Comments | Priority | Priority Comments |
+ *    Recommendation | Overall Comments
+ *
+ * 3. Go to Extensions > Apps Script.
+ *
+ * 4. Replace the default code with:
+ *
+ *    function doPost(e) {
+ *      var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+ *      var data = JSON.parse(e.postData.contents);
+ *      sheet.appendRow([
+ *        new Date(),
+ *        data.proposalTitle,
+ *        data.investigators,
+ *        data.dateReviewed,
+ *        data.reviewerName,
+ *        data.reviewerRole,
+ *        data.feasibility,
+ *        data.feasibilityComments,
+ *        data.methodology,
+ *        data.methodologyFeedback,
+ *        data.funding,
+ *        data.fundingComments,
+ *        data.resources,
+ *        data.resourcesComments,
+ *        data.priority,
+ *        data.priorityComments,
+ *        data.recommendation,
+ *        data.overallComments
+ *      ]);
+ *      return ContentService
+ *        .createTextOutput(JSON.stringify({status: 'ok'}))
+ *        .setMimeType(ContentService.MimeType.JSON);
+ *    }
+ *
+ * 5. Click Deploy > New deployment.
+ *    - Type: Web app
+ *    - Execute as: Me
+ *    - Who has access: Anyone
+ *    - Click Deploy and authorize.
+ *
+ * 6. Copy the Web app URL and paste it below as GOOGLE_SCRIPT_URL.
+ *
+ * 7. That's it! All form submissions will auto-populate your sheet.
+ * ============================================================
+ */
+
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyY2kwEq80O4pE5mDXh_J0cY__MTj2aWK6lXpICnZSbzgUwacrGbSx2p2gs5_O91aCt/exec';
+
+// --- Rating & Choice selection ---
+function selectRating(el) {
+  const parent = el.parentElement;
+  parent.querySelectorAll('.rating-option').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+function selectChoice(el) {
+  const parent = el.parentElement;
+  parent.querySelectorAll('.choice-btn').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+// --- Get selected value from a rating/choice group ---
+function getGroupValue(fieldName) {
+  const group = document.querySelector(`[data-field="${fieldName}"]`);
+  if (!group) return '';
+  const selected = group.querySelector('.selected');
+  return selected ? selected.dataset.value : '';
+}
+
+// --- Get checked resources ---
+function getResources() {
+  const checkboxes = document.querySelectorAll('#resourcesGroup input[type="checkbox"]:checked');
+  return Array.from(checkboxes).map(cb => cb.value).join('; ');
+}
+
+// --- Collect all form data ---
+function collectData() {
+  return {
+    proposalTitle: document.getElementById('proposalTitle').value,
+    investigators: document.getElementById('investigators').value,
+    dateReviewed: document.getElementById('dateReviewed').value,
+    reviewerName: document.getElementById('reviewerName').value,
+    reviewerRole: document.getElementById('reviewerRole').value,
+    feasibility: getGroupValue('feasibility'),
+    feasibilityComments: document.getElementById('feasibilityComments').value,
+    methodology: getGroupValue('methodology'),
+    methodologyFeedback: document.getElementById('methodologyFeedback').value,
+    funding: getGroupValue('funding'),
+    fundingComments: document.getElementById('fundingComments').value,
+    resources: getResources(),
+    resourcesComments: document.getElementById('resourcesComments').value,
+    priority: getGroupValue('priority'),
+    priorityComments: document.getElementById('priorityComments').value,
+    recommendation: getGroupValue('recommendation'),
+    overallComments: document.getElementById('overallComments').value
+  };
+}
+
+// --- Validate required fields ---
+function validate(data) {
+  const missing = [];
+  if (!data.proposalTitle) missing.push('Proposal Title');
+  if (!data.reviewerName) missing.push('Your Name');
+  if (!data.feasibility) missing.push('Feasibility rating');
+  if (!data.methodology) missing.push('Methodology rating');
+  if (!data.priority) missing.push('Priority rating');
+  if (!data.recommendation) missing.push('Overall Recommendation');
+  return missing;
+}
+
+// --- Submit ---
+async function submitForm() {
+  const data = collectData();
+  const missing = validate(data);
+  const status = document.getElementById('submitStatus');
+  const btn = document.getElementById('submitBtn');
+
+  if (missing.length > 0) {
+    status.className = 'submit-status error';
+    status.textContent = 'Please complete: ' + missing.join(', ');
+    return;
+  }
+
+  if (!GOOGLE_SCRIPT_URL) {
+    status.className = 'submit-status error';
+    status.textContent = 'Google Sheets backend not configured. See setup instructions in page source.';
+    return;
+  }
+
+  btn.disabled = true;
+  status.className = 'submit-status';
+  status.textContent = 'Submitting...';
+
+  try {
+    await fetch(GOOGLE_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    status.className = 'submit-status success';
+    status.textContent = 'Evaluation submitted successfully. Thank you!';
+    btn.textContent = 'Submitted';
+  } catch (err) {
+    status.className = 'submit-status error';
+    status.textContent = 'Submission failed. Please try again or contact Amanda.';
+    btn.disabled = false;
+  }
+}
+
+// --- Config banner visibility ---
+document.addEventListener('DOMContentLoaded', function() {
+  if (GOOGLE_SCRIPT_URL) {
+    document.getElementById('configBanner').classList.add('hidden');
+  }
+  // Set default date to today
+  document.getElementById('dateReviewed').valueAsDate = new Date();
+});
+</script>
+
+</body>
+</html>
