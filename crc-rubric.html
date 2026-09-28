@@ -71,6 +71,18 @@
   .cloud-bar.saved .dot { background: #28a745; }
   .cloud-bar.error .dot { background: #c0392b; }
   @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+  .cloud-bar .new-btn {
+    margin-left: 12px;
+    padding: 4px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #1a5276;
+    background: #fff;
+    border: 1px solid #1a5276;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .cloud-bar .new-btn:hover { background: #1a5276; color: #fff; }
 
   /* Sections */
   .section {
@@ -284,12 +296,13 @@
   <div class="header">
     <h1>CCIBDN Clinical Research Committee</h1>
     <h2>Proposal Evaluation Rubric</h2>
-    <p>Please complete all sections and submit your evaluation. Your progress is automatically saved and can be resumed from any device.</p>
+    <p>Please complete all sections and submit your evaluation. Your progress is automatically saved and can be resumed from any device by entering your name. To evaluate a different proposal, click <strong>Start new evaluation</strong>.</p>
   </div>
 
   <div class="cloud-bar" id="cloudBar">
     <span class="dot"></span>
     <span id="cloudText">Checking connection...</span>
+    <button type="button" class="new-btn" id="newEvalBtn" onclick="startNewEvaluation()">Start new evaluation</button>
   </div>
 
   <!-- Proposal Info -->
@@ -639,12 +652,14 @@ async function saveToCloud() {
   saveLocal();
 
   try {
-    await fetch(GOOGLE_SCRIPT_URL, {
+    const resp = await fetch(GOOGLE_SCRIPT_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'text/plain;charset=utf-8' },
       body: JSON.stringify(data),
       redirect: 'follow'
     });
+    const result = await resp.json();
+    if (!resp.ok || result.status !== 'ok') throw new Error(result.message || 'Server error');
     setCloudStatus('saved', 'Draft saved');
   } catch (e) {
     setCloudStatus('error', 'Save failed — cached locally');
@@ -708,25 +723,73 @@ async function submitForm() {
   status.className = 'submit-status';
   status.textContent = 'Submitting...';
 
+  // Stop any pending autosave so it cannot re-create the draft after submission
+  clearTimeout(syncTimer);
+  isSubmitted = true;
+
   data.type = 'submit';
   try {
-    await fetch(GOOGLE_SCRIPT_URL, {
+    const resp = await fetch(GOOGLE_SCRIPT_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'text/plain;charset=utf-8' },
       body: JSON.stringify(data),
       redirect: 'follow'
     });
-    isSubmitted = true;
+    const result = await resp.json();
+    if (!resp.ok || result.status !== 'ok') throw new Error(result.message || 'Server error');
     status.className = 'submit-status success';
     status.textContent = 'Evaluation submitted successfully. Thank you!';
     btn.textContent = 'Submitted';
     setCloudStatus('saved', 'Submitted');
     localStorage.removeItem('crc_rubric_draft');
   } catch (err) {
+    isSubmitted = false;
     status.className = 'submit-status error';
     status.textContent = 'Submission failed. Please try again or contact Amanda.';
     btn.disabled = false;
   }
+}
+
+// --- Start a new evaluation: clear everything except reviewer name/role ---
+async function startNewEvaluation() {
+  const name = document.getElementById('reviewerName').value;
+  const role = document.getElementById('reviewerRole').value;
+
+  // Clear text fields
+  ['proposalTitle','investigators','priorityComments','methodologyFeedback',
+   'resourcesComments','fundingComments','feasibilityComments','overallComments']
+    .forEach(id => { document.getElementById(id).value = ''; });
+  document.getElementById('dateReviewed').valueAsDate = new Date();
+
+  // Clear ratings, choices, checkboxes
+  document.querySelectorAll('.rating-option.selected, .choice-btn.selected')
+    .forEach(o => o.classList.remove('selected'));
+  document.querySelectorAll('#resourcesGroup input[type="checkbox"]')
+    .forEach(cb => { cb.checked = false; });
+
+  // Keep identity
+  document.getElementById('reviewerName').value = name;
+  document.getElementById('reviewerRole').value = role;
+
+  // Re-enable submission
+  isSubmitted = false;
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = false;
+  btn.textContent = 'Submit Evaluation';
+  const status = document.getElementById('submitStatus');
+  status.className = 'submit-status';
+  status.textContent = '';
+
+  // Reset local cache and overwrite the cloud draft with the blank form
+  localStorage.removeItem('crc_rubric_draft');
+  clearTimeout(syncTimer);
+  if (name) {
+    await saveToCloud();
+    setCloudStatus('saved', 'New evaluation started — previous draft cleared');
+  } else {
+    setCloudStatus('saved', 'New evaluation started');
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // --- Auto-save on input ---
@@ -762,6 +825,9 @@ document.addEventListener('DOMContentLoaded', async function() {
     if (cloudData) {
       populateForm(cloudData);
       saveLocal();
+      if (cloudData.proposalTitle) {
+        setCloudStatus('saved', 'Draft loaded: "' + cloudData.proposalTitle + '". Reviewing a different proposal? Click Start new evaluation.');
+      }
     }
   });
 
@@ -772,7 +838,11 @@ document.addEventListener('DOMContentLoaded', async function() {
     if (cloudData) {
       populateForm(cloudData);
       saveLocal();
-      setCloudStatus('saved', 'Draft loaded from cloud');
+      if (cloudData.proposalTitle) {
+        setCloudStatus('saved', 'Draft loaded: "' + cloudData.proposalTitle + '". Reviewing a different proposal? Click Start new evaluation.');
+      } else {
+        setCloudStatus('saved', 'Connected');
+      }
     } else {
       setCloudStatus('saved', 'Connected');
     }
